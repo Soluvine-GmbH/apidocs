@@ -62,10 +62,21 @@
         "description": "",
         "operationId": "createSalesTable",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A new sales order.",
+            "schema": {
+              "$ref": "#/definitions/SalesOrderCreate"
+            },
+            "required": true
+          }
         ],
         "responses": {
           "200": {
@@ -87,8 +98,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -125,8 +135,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -157,8 +166,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -189,8 +197,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -221,8 +228,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -253,8 +259,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -285,8 +290,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -296,16 +300,162 @@
   "securityDefinitions": {
     "flexxlink_auth": {
       "type": "oauth2",
-      "description": "Cli",
-      "tokenUrl": "https://petstore.swagger.io/oauth/authorize",
+      "description": "Use your own OAuth 2.0 credentials to access D365 F&O FlexxLink API. The following client credentials are to indicate what is needed to configure and use the API in a secure manner.",
+      "tokenUrl": "https://login.microsoftonline.com/tenant-id/oauth2/v2.0/token",
       "flow": "application",
       "scopes": {
-        "read:pets": "read your pets",
-        "write:pets": "modify pets in your account"
+        "d365": "https://your-aos-d365-machine-host.axcloud.dynamics.com/.default"
       }
     }
   },
   "definitions": {
+    "SalesOrderCreate": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/Header"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Line"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "$id": "1",
+        "status": "200",
+        "jobId": "2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770",
+        "jobStatus": "2",
+        "JobMessage": "Job '2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770' has been processed succesfully."
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "fromSystem": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "originId": {
+          "type": "string"
+        }
+      }
+    },
+    "Header": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "PurchOrderFormNum": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },
+        "dlvMode": {
+          "type": "string"
+        },
+        "dlvTerm": {
+          "type": "string"
+        },
+        "salesType": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "contactPersonName": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "Line": {
+      "type": "object",
+      "properties": {
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "salesPrice": {
+          "type": "string"
+        },
+        "salesQty": {
+          "type": "string"
+        },
+        "salesUnit": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "ApiResponse": {
       "type": "object",
       "properties": {
