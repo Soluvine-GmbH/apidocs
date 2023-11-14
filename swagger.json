@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample FlexxLink API.  You can find out more about Soluvine at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  This sample provides sample Authorization information and sample responses to each API endpoint.",
-    "version": "1.0.0",
+    "description": "This is a sample FlexxLink API.  You can find out more about Soluvine at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  This page provides sample Authorization information and sample responses to each API endpoint.",
+    "version": "1.0.6",
     "title": "FlexxLink for Dynamics 365 Finance and Operations",
     "termsOfService": "https://soluvine.com/",
     "contact": {
@@ -46,7 +46,7 @@
     },
     {
       "name": "confirmCollection",
-      "description": "Confirms collection transaction ??? in D365 F&O"
+      "description": "Confirms collection transaction in D365 F&O"
     }
   ],
   "schemes": [
@@ -62,10 +62,21 @@
         "description": "",
         "operationId": "createSalesTable",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A new sales order.",
+            "schema": {
+              "$ref": "#/definitions/SalesOrderCreate"
+            },
+            "required": true
+          }
         ],
         "responses": {
           "200": {
@@ -87,8 +98,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -99,7 +109,7 @@
         "tags": [
           "updateSalesTable"
         ],
-        "summary": "Upload a sales order",
+        "summary": "Update a sales order",
         "description": "",
         "operationId": "updateFile",
         "consumes": [
@@ -107,6 +117,17 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An updated sales order.",
+            "schema": {
+              "$ref": "#/definitions/SalesOrderCreate"
+            },
+            "required": true
+          }
         ],
         "responses": {
           "200": {
@@ -120,13 +141,15 @@
             "schema": {
               "$ref": "#/definitions/Api400Response"
             }
+          },
+          "404": {
+            "description": "not found"
           }
         },
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -157,8 +180,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -189,8 +211,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -221,8 +242,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -253,8 +273,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -285,8 +304,7 @@
         "security": [
           {
             "flexxlink_auth": [
-              "write:pets",
-              "read:pets"
+              "d365"
             ]
           }
         ]
@@ -296,16 +314,190 @@
   "securityDefinitions": {
     "flexxlink_auth": {
       "type": "oauth2",
-      "description": "Cli",
-      "tokenUrl": "https://petstore.swagger.io/oauth/authorize",
+      "description": "Use your own OAuth 2.0 credentials to access D365 F&O FlexxLink API. The following client credentials are to indicate what is needed to configure and use the API in a secure manner.",
+      "tokenUrl": "https://login.microsoftonline.com/tenant-id/oauth2/v2.0/token",
       "flow": "application",
       "scopes": {
-        "read:pets": "read your pets",
-        "write:pets": "modify pets in your account"
+        "d365": "https://your-aos-d365-machine-host.axcloud.dynamics.com/.default"
       }
     }
   },
   "definitions": {
+    "SalesOrderCreate": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/Header"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Line"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "_contract": {
+          "message": {
+            "companyId": "usmf",
+            "fromSystem": "Azure Integration",
+            "description": "Test integration",
+            "originId": "Backend System"
+          },
+          "header": {
+            "barcode": "03294782374",
+            "receiptDateRequested": "2022-04-12T00:00:00.000Z",
+            "shippingDateRequested": "2022-05-25T00:00:00.000Z",
+            "custAccount": "234987",
+            "gLNCode": "4305615009999",
+            "customerRef": "PO123456",
+            "PurchOrderFormNum": "101183255",
+            "currencyCode": "EUR",
+            "deliveryName": "Warehouse No. 1",
+            "deliveryCity": "Atlanta",
+            "deliveryCountryRegionId": "Piedmont",
+            "deliveryState": "Georgia",
+            "deliveryStreet": "Everrest Street",
+            "deliveryZipCode": "98122-US",
+            "dlvMode": "Freight",
+            "dlvTerm": "30 days",
+            "salesType": "Sales",
+            "shipComplete": true,
+            "email": "test@testemail.com",
+            "contactPersonName": "John Smith",
+            "phone": "0932472834691",
+            "notes": "Verification message",
+            "lines": null
+          }
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "fromSystem": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "originId": {
+          "type": "string"
+        }
+      }
+    },
+    "Header": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "PurchOrderFormNum": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },
+        "dlvMode": {
+          "type": "string"
+        },
+        "dlvTerm": {
+          "type": "string"
+        },
+        "salesType": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "contactPersonName": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "Line": {
+      "type": "object",
+      "properties": {
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "salesPrice": {
+          "type": "string"
+        },
+        "salesQty": {
+          "type": "string"
+        },
+        "salesUnit": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "ApiResponse": {
       "type": "object",
       "properties": {

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "This is a sample FlexxLink API.  You can find out more about Soluvine at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  This sample provides sample Authorization information and sample responses to each API endpoint.",
-    "version": "1.0.6",
+    "version": "1.0.0",
     "title": "FlexxLink for Dynamics 365 Finance and Operations",
     "termsOfService": "https://soluvine.com/",
     "contact": {
