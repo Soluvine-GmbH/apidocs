@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample FlexxLink API.  You can find out more about Soluvine at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  This sample provides sample Authorization information and sample responses to each API endpoint.",
+    "description": "This is a sample FlexxLink API.  You can find out more about Soluvine at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  This page provides sample Authorization information and sample responses to each API endpoint.",
     "version": "1.0.6",
-    "title": "FlexxLink for Dynmamics 365 Finance and Operations",
+    "title": "FlexxLink for Dynamics 365 Finance and Operations",
     "termsOfService": "https://soluvine.com/",
     "contact": {
       "email": "flexx@soluvine.com"
@@ -46,7 +46,7 @@
     },
     {
       "name": "confirmCollection",
-      "description": "Confirms collection transaction ??? in D365 F&O"
+      "description": "Confirms collection transaction in D365 F&O"
     }
   ],
   "schemes": [
@@ -109,7 +109,7 @@
         "tags": [
           "updateSalesTable"
         ],
-        "summary": "Upload a sales order",
+        "summary": "Update a sales order",
         "description": "",
         "operationId": "updateFile",
         "consumes": [
@@ -117,6 +117,17 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An updated sales order.",
+            "schema": {
+              "$ref": "#/definitions/SalesOrderCreate"
+            },
+            "required": true
+          }
         ],
         "responses": {
           "200": {
@@ -130,6 +141,9 @@
             "schema": {
               "$ref": "#/definitions/Api400Response"
             }
+          },
+          "404": {
+            "description": "not found"
           }
         },
         "security": [
@@ -331,11 +345,39 @@
         }
       },
       "example": {
-        "$id": "1",
-        "status": "200",
-        "jobId": "2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770",
-        "jobStatus": "2",
-        "JobMessage": "Job '2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770' has been processed succesfully."
+        "_contract": {
+          "message": {
+            "companyId": "usmf",
+            "fromSystem": "Azure Integration",
+            "description": "Test integration",
+            "originId": "Backend System"
+          },
+          "header": {
+            "barcode": "03294782374",
+            "receiptDateRequested": "2022-04-12T00:00:00.000Z",
+            "shippingDateRequested": "2022-05-25T00:00:00.000Z",
+            "custAccount": "234987",
+            "gLNCode": "4305615009999",
+            "customerRef": "PO123456",
+            "PurchOrderFormNum": "101183255",
+            "currencyCode": "EUR",
+            "deliveryName": "Warehouse No. 1",
+            "deliveryCity": "Atlanta",
+            "deliveryCountryRegionId": "Piedmont",
+            "deliveryState": "Georgia",
+            "deliveryStreet": "Everrest Street",
+            "deliveryZipCode": "98122-US",
+            "dlvMode": "Freight",
+            "dlvTerm": "30 days",
+            "salesType": "Sales",
+            "shipComplete": true,
+            "email": "test@testemail.com",
+            "contactPersonName": "John Smith",
+            "phone": "0932472834691",
+            "notes": "Verification message",
+            "lines": null
+          }
+        }
       }
     },
     "Message": {
