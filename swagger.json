@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample FlexxLink API.  You can find out more about Soluvine at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  This page provides sample Authorization information and sample responses to each API endpoint.",
+    "description": "This is documentation for FlexxLink API from Soluvine GmbH.  You can find out more about Soluvine solutions at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  </br> The FlexxLink API is using REST API to define its endpoints. This page also provides sample Authorization information and sample responses to each API endpoint.",
     "version": "1.0.6",
     "title": "FlexxLink for Dynamics 365 Finance and Operations",
     "termsOfService": "https://soluvine.com/",
@@ -9,54 +9,46 @@
       "email": "flexx@soluvine.com"
     },
     "license": {
-      "name": "Soluvine GMbH",
+      "name": "Soluvine GmbH",
       "url": "https://soluvine.com/flexxlink/"
     }
   },
   "host": "yourcloudd365aos.axcloud.dynamics.com",
-  "basePath": "/api/services/FXLInboundServices/",
+  "basePath": "/api/services/",
   "tags": [
     {
-      "name": "createSalesTable",
-      "description": "Creates a sales order in D365 F&O.",
+      "name": "EDI Interfaces",
+      "description": "Endpoints to integrate EDI messages into D365 F&O.",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://soluvine.com/"
       }
     },
     {
-      "name": "updateSalesTable",
-      "description": "Updates a sales order in D365 F&O"
+      "name": "BVBS interface",
+      "description": "Imports BVBS (Bundesvereinigung Bausoftware) data into D365 F&O",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/"
+      }
     },
     {
-      "name": "createPurchTable",
-      "description": "Creates a purchase order in D365 F&O"
-    },
-    {
-      "name": "confirmPurchTable",
-      "description": "Confirms a purchase order in D365 F&O"
-    },
-    {
-      "name": "invoicePurchTable",
-      "description": "Creates a purchase invoice in D365 F&O"
-    },
-    {
-      "name": "createVendInvoice",
-      "description": "Creates a vendor invoice in D365 F&O"
-    },
-    {
-      "name": "confirmCollection",
-      "description": "Confirms collection transaction in D365 F&O"
+      "name": "Production interfaces",
+      "description": "Imports Production data into D365 F&O",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/"
+      }
     }
   ],
   "schemes": [
     "https"
   ],
   "paths": {
-    "/FXLSalesTableService/createSalesTable": {
+    "/FXLInboundServices/FXLSalesTableService/createSalesTable": {
       "post": {
         "tags": [
-          "createSalesTable"
+          "EDI Interfaces"
         ],
         "summary": "Upload a sales order",
         "description": "",
@@ -104,10 +96,10 @@
         ]
       }
     },
-    "/FXLSalesTableService/updateSalesTable": {
+    "/FXLInboundServices/FXLSalesTableService/updateSalesTable": {
       "post": {
         "tags": [
-          "updateSalesTable"
+          "EDI Interfaces"
         ],
         "summary": "Update a sales order",
         "description": "",
@@ -122,9 +114,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "An updated sales order.",
+            "description": "An update of a sales order.",
             "schema": {
-              "$ref": "#/definitions/SalesOrderCreate"
+              "$ref": "#/definitions/SalesOrderUpdate"
             },
             "required": true
           }
@@ -155,10 +147,10 @@
         ]
       }
     },
-    "/FXLPurchTableService/createPurchTable": {
+    "/FXLInboundServices/FXLPurchTableService/createPurchTable": {
       "post": {
         "tags": [
-          "createPurchTable"
+          "EDI Interfaces"
         ],
         "summary": "Create a purchase order",
         "description": "",
@@ -169,12 +161,32 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A new purchase order.",
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderCreate"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
           }
         },
         "security": [
@@ -186,10 +198,10 @@
         ]
       }
     },
-    "/FXLPurchTableService/confirmPurchTable": {
+    "/FXLInboundServices/FXLPurchTableService/confirmPurchTable": {
       "post": {
         "tags": [
-          "confirmPurchTable"
+          "EDI Interfaces"
         ],
         "summary": "Confirm a purchase order",
         "description": "",
@@ -200,12 +212,32 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A confimation of a purchase order.",
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderConfirm"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
           }
         },
         "security": [
@@ -217,10 +249,10 @@
         ]
       }
     },
-    "/FXLPurchTableService/invoicePurchTable": {
+    "/FXLInboundServices/FXLPurchTableService/invoicePurchTable": {
       "post": {
         "tags": [
-          "invoicePurchTable"
+          "EDI Interfaces"
         ],
         "summary": "Create a purchase invoice",
         "description": "",
@@ -237,6 +269,15 @@
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
           }
         },
         "security": [
@@ -248,10 +289,10 @@
         ]
       }
     },
-    "/FXLVendInvoiceService/createVendInvoice": {
+    "/FXLInboundServices/FXLVendInvoiceService/createVendInvoice": {
       "post": {
         "tags": [
-          "createVendInvoice"
+          "EDI Interfaces"
         ],
         "summary": "Create a vendor invoice",
         "description": "",
@@ -279,10 +320,10 @@
         ]
       }
     },
-    "/FXLCustCollectionService/confirmCollection": {
+    "/FXLInboundServices/FXLCustCollectionService/confirmCollection": {
       "post": {
         "tags": [
-          "confirmCollection"
+          "EDI Interfaces"
         ],
         "summary": "Confirm a customer collection",
         "description": "",
@@ -309,6 +350,159 @@
           }
         ]
       }
+    },
+    "/BVBSFileImportServiceGroup/FXLBVBSImportFileService/importBVBSFile": {
+      "post": {
+        "tags": [
+          "BVBS interface"
+        ],
+        "summary": "Imports a set of BVBS data",
+        "description": "",
+        "operationId": "importBVBSFile",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A set of BVBS data.",
+            "schema": {
+              "$ref": "#/definitions/BvbsImport"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        },
+        "security": [
+          {
+            "flexxlink_auth": [
+              "d365"
+            ]
+          }
+        ]
+      }
+    },
+    "/FXLInboundServices/FXLProdTableService/start": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Changes status of a Production order to Started",
+        "description": "",
+        "operationId": "start",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Start Production Order in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/ProductionStart"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        },
+        "security": [
+          {
+            "flexxlink_auth": [
+              "d365"
+            ]
+          }
+        ]
+      }
+    },
+    "/FXLInboundServices/FXLProdTableService/reportAsFinished": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Changes status of a Production order to Finished",
+        "description": "",
+        "operationId": "reportAsFinished",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Start Production Order in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/ProductionFinished"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        },
+        "security": [
+          {
+            "flexxlink_auth": [
+              "d365"
+            ]
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
@@ -323,6 +517,28 @@
     }
   },
   "definitions": {
+    "SalesOrderUpdate": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/Header"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Line"
+              }
+            }
+          }
+        }
+      }
+    },
     "SalesOrderCreate": {
       "type": "object",
       "properties": {
@@ -350,7 +566,9 @@
             "companyId": "usmf",
             "fromSystem": "Azure Integration",
             "description": "Test integration",
-            "originId": "Backend System"
+            "applicationId": "Backend System",
+            "messageId": "abcd-1234-efgh-5678",
+            "messageTimestamp": "YYYY-MM-DDTHH:mm:ss"
           },
           "header": {
             "barcode": "03294782374",
@@ -375,7 +593,32 @@
             "contactPersonName": "John Smith",
             "phone": "0932472834691",
             "notes": "Verification message",
-            "lines": null
+            "lines": {
+              "lineNum": 1,
+              "itemId": "4305615615318",
+              "salesPrice": 0,
+              "salesQty": 408,
+              "salesUnit": "PCE",
+              "itemBarCode": "4305615615318",
+              "globalTradeItemNumber": "4305615615318",
+              "name": "Contoso Item"
+            }
+          }
+        }
+      }
+    },
+    "PurchaseOrderConfirm": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/PurchaseHeader"
+            }
           }
         }
       }
@@ -386,14 +629,18 @@
         "companyId": {
           "type": "string"
         },
-        "fromSystem": {
-          "type": "string"
-        },
         "description": {
           "type": "string"
         },
-        "originId": {
+        "applicationId": {
           "type": "string"
+        },
+        "messageId": {
+          "type": "string"
+        },
+        "messageTimeStamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -465,6 +712,295 @@
         },
         "notes": {
           "type": "string"
+        }
+      }
+    },
+    "PurchaseOrderCreate": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/PurchaseHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseLine"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PurchaseHeader": {
+      "type": "object",
+      "required": [
+        "orderAccount",
+        "documentNum"
+      ],
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "discPercent": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits"
+        },
+        "documentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "documentNum": {
+          "type": "string"
+        },
+        "fXLImportId": {
+          "type": "string"
+        },
+        "fXLWorkerPurchPlacer": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "updateAction": {
+          "type": "string"
+        },
+        "vendorRef": {
+          "type": "string"
+        },
+        "workerPurchPlacer": {
+          "type": "string"
+        }
+      }
+    },
+    "PurchaseLine": {
+      "type": "object",
+      "properties": {
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string"
+        },
+        "externalItemId": {
+          "type": "string"
+        },
+        "fxlImportId": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "intrastatCommodity": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "linePercent": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits"
+        },
+        "message": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "origCountryRegionId": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        }
+      }
+    },
+    "BvbsImport": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BvbsLine"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "_contract": {
+          "message": {
+            "companyId": "usmf",
+            "fromSystem": "Azure Integration",
+            "description": "Test Integration",
+            "applicationId": "BVBS"
+          },
+          "lines": {
+            "BOMItemId": "bi1234-56789",
+            "FileName": "test_bvbs_input_file.bvbs",
+            "Geometrie": "l10w10l10w10",
+            "Length": 10,
+            "MeshType": "Q188",
+            "PlanId": "04321",
+            "PositionNo": "1",
+            "ProjectId": "pbi2219",
+            "Qty": 1,
+            "Quality": "B500",
+            "ReinforcementType": "Rod",
+            "RodDiameter": 10,
+            "RollDiameter": 10,
+            "Weight": 10.123456,
+            "Width": 10
+          }
+        }
+      }
+    },
+    "BvbsLine": {
+      "type": "object",
+      "properties": {
+        "BOMItemId": {
+          "type": "string"
+        },
+        "FileName": {
+          "type": "string"
+        },
+        "Geometrie": {
+          "type": "string"
+        },
+        "Length": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MeshType": {
+          "type": "string"
+        },
+        "PlanId": {
+          "type": "string"
+        },
+        "PositionNo": {
+          "type": "string"
+        },
+        "ProjectId": {
+          "type": "string"
+        },
+        "Qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Quality": {
+          "type": "string"
+        },
+        "ReinforcementType": {
+          "type": "string"
+        },
+        "RodDiameter": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RollDiameter": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Weight": {
+          "type": "number",
+          "multipleOf": 0.000001,
+          "description": "Precision of six digits"
+        },
+        "Width": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ProductionStart": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "ProdId": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ProductionFinished": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "ProdId": {
+              "type": "string"
+            }
+          }
         }
       }
     },
