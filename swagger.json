@@ -105,7 +105,7 @@
         "description": "",
         "operationId": "updateFile",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -156,7 +156,7 @@
         "description": "",
         "operationId": "createPurchTable",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -207,7 +207,7 @@
         "description": "",
         "operationId": "confirmPurchTable",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -258,10 +258,21 @@
         "description": "",
         "operationId": "invoicePurchTable",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An invoice for a purchase order.",
+            "schema": {
+              "$ref": "#/definitions/InvoicePurchTable"
+            },
+            "required": true
+          }
         ],
         "responses": {
           "200": {
@@ -298,10 +309,21 @@
         "description": "",
         "operationId": "createVendInvoice",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An invoice for a purchase order.",
+            "schema": {
+              "$ref": "#/definitions/CreateVendInvoice"
+            },
+            "required": true
+          }
         ],
         "responses": {
           "200": {
@@ -309,6 +331,15 @@
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
           }
         },
         "security": [
@@ -329,7 +360,7 @@
         "description": "",
         "operationId": "confirmCollection",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -360,7 +391,7 @@
         "description": "",
         "operationId": "importBVBSFile",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -411,7 +442,7 @@
         "description": "",
         "operationId": "start",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -462,7 +493,7 @@
         "description": "",
         "operationId": "reportAsFinished",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -517,6 +548,120 @@
     }
   },
   "definitions": {
+    "CreateVendInvoice": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "companyId": {
+              "type": "string"
+            },
+            "currencyCode": {
+              "type": "string"
+            },
+            "documentDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "documentId": {
+              "type": "string",
+              "description": "Internal FlexxLink document number."
+            },
+            "fileData": {
+              "type": "string",
+              "format": "byte",
+              "description": "Base64 encoded document. Accepts PDF, MSG, TIFF, JPG."
+            },
+            "fileName": {
+              "type": "string"
+            },
+            "iBAN": {
+              "type": "string"
+            },
+            "invoiceAccount": {
+              "type": "string"
+            },
+            "invoiceAmount": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "description": "Precision of two decimals."
+            },
+            "num": {
+              "type": "string",
+              "description": "Invoice number."
+            },
+            "orderAccount": {
+              "type": "string"
+            },
+            "purchId": {
+              "type": "string"
+            },
+            "purchName": {
+              "type": "string"
+            },
+            "taxAmount": {
+              "type": "number",
+              "multipleOf": 0.01,
+              "description": "Precision of two decimals"
+            },
+            "vATNum": {
+              "type": "string"
+            },
+            "vendReference": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ConfirmCollection": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/CollectionHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CollectionLines"
+              }
+            }
+          }
+        }
+      }
+    },
+    "InvoicePurchTable": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/PurchaseInvoiceHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseInvoiceLine"
+              }
+            }
+          }
+        }
+      }
+    },
     "SalesOrderUpdate": {
       "type": "object",
       "properties": {
@@ -715,6 +860,75 @@
         }
       }
     },
+    "CollectionHeader": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "fXLImportId": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "isCredit": {
+          "type": "number"
+        },
+        "message": {
+          "type": "string"
+        },
+        "paymMode": {
+          "type": "string"
+        },
+        "paymReference": {
+          "type": "string"
+        },
+        "receiverBankAccount": {
+          "type": "string"
+        },
+        "receiverBankName": {
+          "type": "string"
+        },
+        "receiverIBAN": {
+          "type": "string"
+        },
+        "receiverSWIFTNo": {
+          "type": "string"
+        },
+        "senderBankAccount": {
+          "type": "string"
+        },
+        "senderBankName": {
+          "type": "string"
+        },
+        "senderIBAN": {
+          "type": "string"
+        },
+        "senderSWIFTNo": {
+          "type": "string"
+        },
+        "settlementDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "totalAmount": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two decimals."
+        },
+        "transDateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "PurchaseOrderCreate": {
       "type": "object",
       "properties": {
@@ -734,6 +948,88 @@
               }
             }
           }
+        }
+      }
+    },
+    "PurchaseInvoiceHeader": {
+      "type": "object",
+      "required": [
+        "orderAccount",
+        "documentNum"
+      ],
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "discPercent": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits"
+        },
+        "documentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "documentNum": {
+          "type": "string"
+        },
+        "fXLImportId": {
+          "type": "string"
+        },
+        "fXLWorkerPurchPlacer": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "updateAction": {
+          "type": "string"
+        },
+        "vendorRef": {
+          "type": "string"
+        },
+        "workerPurchPlacer": {
+          "type": "string"
         }
       }
     },
@@ -865,6 +1161,86 @@
           "type": "string"
         },
         "port": {
+          "type": "string"
+        }
+      }
+    },
+    "PurchaseInvoiceLine": {
+      "type": "object",
+      "properties": {
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string"
+        },
+        "externalItemId": {
+          "type": "string"
+        },
+        "fxlImportId": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "intrastatCommodity": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "linePercent": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits"
+        },
+        "message": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "origCountryRegionId": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        }
+      }
+    },
+    "CollectionLines": {
+      "type": "object",
+      "properties": {
+        "discAmount": {
+          "type": "number"
+        },
+        "documentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "grossAmount": {
+          "type": "number"
+        },
+        "message": {
+          "type": "string"
+        },
+        "netAmount": {
+          "type": "number"
+        },
+        "paymAmount": {
+          "type": "number"
+        },
+        "paymentReference": {
+          "type": "string"
+        },
+        "paymentReferenceType": {
           "type": "string"
         }
       }
