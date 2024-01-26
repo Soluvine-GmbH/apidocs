@@ -365,6 +365,17 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An invoice for a purchase order.",
+            "schema": {
+              "$ref": "#/definitions/ConfirmCollection"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
