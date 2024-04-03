@@ -25,6 +25,14 @@
       }
     },
     {
+      "name": "Document archive",
+      "description": "Endpoint to archive documents in D365 F&O.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/flexxstore/"
+      }
+    },
+    {
       "name": "BVBS interface",
       "description": "Imports BVBS (Bundesvereinigung Bausoftware) data into D365 F&O",
       "externalDocs": {
@@ -86,14 +94,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLSalesTableService/updateSalesTable": {
@@ -137,14 +138,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLPurchTableService/createPurchTable": {
@@ -188,14 +182,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLPurchTableService/confirmPurchTable": {
@@ -239,14 +226,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLPurchTableService/invoicePurchTable": {
@@ -290,14 +270,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLVendInvoiceService/createVendInvoice": {
@@ -341,14 +314,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLCustCollectionService/confirmCollection": {
@@ -383,14 +349,42 @@
               "$ref": "#/definitions/ApiResponse"
             }
           }
-        },
-        "security": [
+        }
+      }
+    },
+    "/FXLInboundServicesDoc/FXLDocArchiveService/createDocArchiveRef": {
+      "post": {
+        "tags": [
+          "Document archive"
+        ],
+        "summary": "Create document archive entry",
+        "description": "",
+        "operationId": "createDocArchiveRef",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
           {
-            "flexxlink_auth": [
-              "d365"
-            ]
+            "in": "body",
+            "name": "body",
+            "description": "An entry in the document archive.",
+            "schema": {
+              "$ref": "#/definitions/CreateDocuArchiveRef"
+            },
+            "required": true
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          }
+        }
       }
     },
     "/BVBSFileImportServiceGroup/FXLBVBSImportFileService/importBVBSFile": {
@@ -434,14 +428,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLProdTableService/start": {
@@ -485,14 +472,7 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
+        }
       }
     },
     "/FXLInboundServices/FXLProdTableService/reportAsFinished": {
@@ -536,29 +516,102 @@
           "404": {
             "description": "not found"
           }
-        },
-        "security": [
-          {
-            "flexxlink_auth": [
-              "d365"
-            ]
-          }
-        ]
-      }
-    }
-  },
-  "securityDefinitions": {
-    "flexxlink_auth": {
-      "type": "oauth2",
-      "description": "Use your own OAuth 2.0 credentials to access D365 F&O FlexxLink API. The following client credentials are to indicate what is needed to configure and use the API in a secure manner.",
-      "tokenUrl": "https://login.microsoftonline.com/tenant-id/oauth2/v2.0/token",
-      "flow": "application",
-      "scopes": {
-        "d365": "https://your-aos-d365-machine-host.axcloud.dynamics.com/.default"
+        }
       }
     }
   },
   "definitions": {
+    "CreateDocuArchiveRef": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "accountType": {
+              "type": "string",
+              "description": "Vendor or Customer"
+            },
+            "agreementId": {
+              "type": "string"
+            },
+            "archiveId": {
+              "type": "string"
+            },
+            "barcodeId": {
+              "type": "string"
+            },
+            "custVendAccount": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "documentCreatedDateTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "documentDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "documentId": {
+              "type": "string"
+            },
+            "fileData": {
+              "type": "string",
+              "description": "base64 encoded file contents"
+            },
+            "fileId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "fileName": {
+              "type": "string"
+            },
+            "filePath": {
+              "type": "string"
+            },
+            "fileUrl": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "inventBatchId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "orderId": {
+              "type": "string"
+            },
+            "orderRefId": {
+              "type": "string"
+            },
+            "orderType": {
+              "type": "string"
+            },
+            "projId": {
+              "type": "string"
+            },
+            "quotationId": {
+              "type": "string"
+            },
+            "refJournalId": {
+              "type": "string"
+            },
+            "trader": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
     "CreateVendInvoice": {
       "type": "object",
       "properties": {
@@ -598,7 +651,6 @@
             },
             "invoiceAmount": {
               "type": "number",
-              "multipleOf": 0.01,
               "description": "Precision of two decimals."
             },
             "num": {
@@ -616,7 +668,6 @@
             },
             "taxAmount": {
               "type": "number",
-              "multipleOf": 0.01,
               "description": "Precision of two decimals"
             },
             "vATNum": {
@@ -931,7 +982,6 @@
         },
         "totalAmount": {
           "type": "number",
-          "multipleOf": 0.01,
           "description": "Precision of two decimals."
         },
         "transDateTime": {
@@ -984,7 +1034,6 @@
         },
         "discPercent": {
           "type": "number",
-          "multipleOf": 0.01,
           "description": "Precision of two digits"
         },
         "documentDate": {
@@ -1066,7 +1115,6 @@
         },
         "discPercent": {
           "type": "number",
-          "multipleOf": 0.01,
           "description": "Precision of two digits"
         },
         "documentDate": {
@@ -1159,7 +1207,6 @@
         },
         "linePercent": {
           "type": "number",
-          "multipleOf": 0.01,
           "description": "Precision of two digits"
         },
         "message": {
@@ -1209,7 +1256,6 @@
         },
         "linePercent": {
           "type": "number",
-          "multipleOf": 0.01,
           "description": "Precision of two digits"
         },
         "message": {
@@ -1350,7 +1396,6 @@
         },
         "Weight": {
           "type": "number",
-          "multipleOf": 0.000001,
           "description": "Precision of six digits"
         },
         "Width": {
