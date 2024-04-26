@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "This is documentation for FlexxLink API from Soluvine GmbH.  You can find out more about Soluvine solutions at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  </br> The FlexxLink API is using REST API to define its endpoints. This page also provides sample Authorization information and sample responses to each API endpoint.",
-    "version": "1.0.6",
+    "version": "1.1.0",
     "title": "FlexxLink for Dynamics 365 Finance and Operations",
     "termsOfService": "https://soluvine.com/",
     "contact": {
@@ -17,11 +17,19 @@
   "basePath": "/api/services/",
   "tags": [
     {
-      "name": "EDI Interfaces",
+      "name": "EDI and B2B interfaces",
       "description": "Endpoints to integrate EDI messages into D365 F&O.",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://soluvine.com/"
+      }
+    },
+    {
+      "name": "OCR Vendor invoice",
+      "description": "Endpoint to integrate data from OCR invoices.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/flexxstore/"
       }
     },
     {
@@ -53,10 +61,10 @@
     "https"
   ],
   "paths": {
-    "/FXLInboundServices/FXLSalesTableService/createSalesTable": {
+    "/FXLInboundServices_B2B/FXLSalesTableService/createSalesTable": {
       "post": {
         "tags": [
-          "EDI Interfaces"
+          "EDI and B2B interfaces"
         ],
         "summary": "Upload a sales order",
         "description": "",
@@ -97,10 +105,10 @@
         }
       }
     },
-    "/FXLInboundServices/FXLSalesTableService/updateSalesTable": {
+    "/FXLInboundServices_B2B/FXLSalesTableService/updateSalesTable": {
       "post": {
         "tags": [
-          "EDI Interfaces"
+          "EDI and B2B interfaces"
         ],
         "summary": "Update a sales order",
         "description": "",
@@ -141,10 +149,10 @@
         }
       }
     },
-    "/FXLInboundServices/FXLPurchTableService/createPurchTable": {
+    "/FXLInboundServices_B2B/FXLPurchTableService/createPurchTable": {
       "post": {
         "tags": [
-          "EDI Interfaces"
+          "EDI and B2B interfaces"
         ],
         "summary": "Create a purchase order",
         "description": "",
@@ -185,10 +193,10 @@
         }
       }
     },
-    "/FXLInboundServices/FXLPurchTableService/confirmPurchTable": {
+    "/FXLInboundServices_B2B/FXLPurchTableService/confirmPurchTable": {
       "post": {
         "tags": [
-          "EDI Interfaces"
+          "EDI and B2B interfaces"
         ],
         "summary": "Confirm a purchase order",
         "description": "",
@@ -229,10 +237,10 @@
         }
       }
     },
-    "/FXLInboundServices/FXLPurchTableService/invoicePurchTable": {
+    "/FXLInboundServices_B2B/FXLPurchTableService/invoicePurchTable": {
       "post": {
         "tags": [
-          "EDI Interfaces"
+          "EDI and B2B interfaces"
         ],
         "summary": "Create a purchase invoice",
         "description": "",
@@ -273,10 +281,10 @@
         }
       }
     },
-    "/FXLInboundServices/FXLVendInvoiceService/createVendInvoice": {
+    "/FXLInboundServices_OCR/FXLVendInvoiceService/createVendInvoice": {
       "post": {
         "tags": [
-          "EDI Interfaces"
+          "OCR Vendor invoice"
         ],
         "summary": "Create a vendor invoice",
         "description": "",
@@ -317,10 +325,10 @@
         }
       }
     },
-    "/FXLInboundServices/FXLCustCollectionService/confirmCollection": {
+    "/FXLInboundServices_B2B/FXLCustCollectionService/confirmCollection": {
       "post": {
         "tags": [
-          "EDI Interfaces"
+          "EDI and B2B interfaces"
         ],
         "summary": "Confirm a customer collection",
         "description": "",
@@ -397,7 +405,7 @@
         }
       }
     },
-    "/FXSInboundServices/FXSDocArchiveService/createDocArchiveRef": {
+    "/FXLInboundServices_Doc/FXLDocArchiveService/createDocArchiveRef": {
       "post": {
         "tags": [
           "Document archive"
@@ -485,7 +493,7 @@
         }
       }
     },
-    "/FXLInboundServices/FXLProdTableService/start": {
+    "/FXLInboundServices_Prod/FXLProdTableService/start": {
       "post": {
         "tags": [
           "Production interfaces"
@@ -529,14 +537,58 @@
         }
       }
     },
-    "/FXLInboundServices/FXLProdTableService/reportAsFinished": {
+    "/FXLInboundServices_Prod/FXLProdTableService/reportAsFinishedProgress": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Reports progress of a Production order",
+        "description": "",
+        "operationId": "reportAsFinishedProgress",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Start Production Order in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/ProductionFinished"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableService/reportAsFinishedCompleted": {
       "post": {
         "tags": [
           "Production interfaces"
         ],
         "summary": "Changes status of a Production order to Finished",
         "description": "",
-        "operationId": "reportAsFinished",
+        "operationId": "reportAsFinishedCompleted",
         "consumes": [
           "application/json"
         ],
@@ -1542,7 +1594,7 @@
         },
         "Weight": {
           "type": "number",
-          "description": "Precision of six digits"
+          "description": "Precision of six digits."
         },
         "Width": {
           "type": "integer",
@@ -1559,7 +1611,7 @@
             "message": {
               "$ref": "#/definitions/Message"
             },
-            "ProdId": {
+            "prodId": {
               "type": "string"
             }
           }
@@ -1572,11 +1624,33 @@
         "_contract": {
           "type": "object",
           "properties": {
+            "endjob": {
+              "type": "boolean",
+              "description": "true for Completed, false for Progress"
+            },
+            "inventLocationId": {
+              "type": "string"
+            },
+            "itemId": {
+              "type": "string"
+            },
             "message": {
               "$ref": "#/definitions/Message"
             },
-            "ProdId": {
+            "processingTime": {
+              "type": "number",
+              "description": "Precision of two digits. Unit defined in D365."
+            },
+            "prodId": {
               "type": "string"
+            },
+            "qtyError": {
+              "type": "number",
+              "description": "Precision of two digits."
+            },
+            "qtyGood": {
+              "type": "number",
+              "description": "Precision of two digits."
             }
           }
         }
