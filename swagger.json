@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "This is documentation for FlexxWare API from Soluvine GmbH.  You can find out more about Soluvine solutions at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  </br> The FlexxWare API is using REST API to define its endpoints. This page also provides sample Authorization information and sample responses to each API endpoint.",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "title": "FlexxWare for Dynamics 365 Finance and Operations",
     "termsOfService": "https://soluvine.com/",
     "contact": {
@@ -724,87 +724,112 @@
         "_contract": {
           "type": "object",
           "properties": {
-            "accountType": {
-              "type": "string",
-              "description": "Vendor or Customer"
-            },
-            "agreementId": {
-              "type": "string"
-            },
-            "archiveId": {
-              "type": "string"
-            },
-            "barcodeId": {
-              "type": "string"
-            },
             "companyId": {
-              "type": "string",
-              "description": "D365 Company ID/Legal entity"
-            },
-            "custVendAccount": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "documentCreatedDateTime": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "documentDate": {
-              "type": "string",
-              "format": "date"
-            },
-            "documentId": {
               "type": "string"
             },
             "fileData": {
               "type": "string",
               "description": "base64 encoded file contents"
             },
-            "fileId": {
-              "type": "string",
-              "format": "uuid"
+            "docArchive": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "externalDocTypeId": {
+                  "type": "string",
+                  "enum": [
+                    "Purch invoice",
+                    "VALUE2",
+                    "VALUEN"
+                  ]
+                }
+              }
             },
-            "fileName": {
-              "type": "string"
-            },
-            "filePath": {
-              "type": "string"
-            },
-            "fileUrl": {
-              "type": "string"
-            },
-            "id": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "inventBatchId": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "orderId": {
-              "type": "string"
-            },
-            "orderRefId": {
-              "type": "string"
-            },
-            "orderType": {
-              "type": "string"
-            },
-            "projId": {
-              "type": "string"
-            },
-            "quotationId": {
-              "type": "string"
-            },
-            "refJournalId": {
-              "type": "string"
-            },
-            "trader": {
-              "type": "integer"
+            "docArchiveRef": {
+              "type": "object",
+              "properties": {
+                "accountTypestr": {
+                  "type": "string",
+                  "description": "Vendor or Customer",
+                  "enum": [
+                    "Vend",
+                    "Cust",
+                    "None"
+                  ]
+                },
+                "agreementId": {
+                  "type": "string"
+                },
+                "barcodeId": {
+                  "type": "string",
+                  "description": "Dedicated to barcode handling. If barcode is sent, the following values are taken from D365 only: accountTypestr, custVendAccount, orderTypeStr, orderId, agreementId, documentDate, documentId, inventBatchId, projId, quotationId, assetId."
+                },
+                "custVendAccount": {
+                  "type": "string"
+                },
+                "documentCreatedDateTime": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "documentDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "documentId": {
+                  "type": "string"
+                },
+                "fileId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "fileName": {
+                  "type": "string"
+                },
+                "filePath": {
+                  "type": "string"
+                },
+                "fileUrl": {
+                  "type": "string"
+                },
+                "inventBatchId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "orderTypeStr": {
+                  "type": "string",
+                  "enum": [
+                    "None",
+                    "PurchOrder",
+                    "PurchAgreement",
+                    "SalesOrder",
+                    "SalesAgreement",
+                    "SalesQuotation",
+                    "TransferOrder",
+                    "WMSJournalTable",
+                    "CustCollectionLetter"
+                  ]
+                },
+                "projId": {
+                  "type": "string"
+                },
+                "quotationId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "trader": {
+                  "type": "integer"
+                },
+                "connectionId": {
+                  "type": "string",
+                  "description": "Name of the connection as defined in D365. Used with the fileUrl value."
+                }
+              }
             }
           }
         }
