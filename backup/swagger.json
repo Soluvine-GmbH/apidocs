@@ -415,6 +415,7 @@
     },
     "/FXSInboundServices/FXSDocArchiveService/createDocArchiveRef": {
       "post": {
+        "deprecated": true,
         "tags": [
           "Document archive"
         ],
@@ -434,6 +435,138 @@
             "description": "An entry in the document archive.",
             "schema": {
               "$ref": "#/definitions/CreateDocuArchiveRefFXS"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/FXSInboundServices/FXSDocArchiveService/addFile": {
+      "post": {
+        "tags": [
+          "Document archive"
+        ],
+        "summary": "Adds a file with it s contents and metadata to document archive",
+        "description": "",
+        "operationId": "addFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An entry in the document archive.",
+            "schema": {
+              "$ref": "#/definitions/AddFile"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/FXSInboundServices/FXSDocArchiveService/scanFile": {
+      "post": {
+        "tags": [
+          "Document archive"
+        ],
+        "summary": "Adds a scanned file with barcode reference to document archive",
+        "description": "",
+        "operationId": "scanFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An entry in the document archive.",
+            "schema": {
+              "$ref": "#/definitions/ScanFile"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/FXSInboundServices/FXSDocArchiveService/indexFile": {
+      "post": {
+        "tags": [
+          "Document archive"
+        ],
+        "summary": "Indexes a file in document archive with metadata and link",
+        "description": "",
+        "operationId": "indexFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An entry in the document archive.",
+            "schema": {
+              "$ref": "#/definitions/IndexFile"
             },
             "required": true
           }
@@ -723,6 +856,240 @@
     }
   },
   "definitions": {
+    "AddFile": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "fileData": {
+              "type": "string",
+              "description": "base64 encoded file contents"
+            },
+            "companyId": {
+              "type": "string",
+              "description": "Legal entity in D365 F&O"
+            },
+            "docArchive": {
+              "type": "object",
+              "required": [
+                "fileName",
+                "typeId"
+              ],
+              "properties": {
+                "fileName": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "typeId": {
+                  "type": "string",
+                  "description": "Validated against the list of Document types in D365 F&O ECM Document Management"
+                }
+              }
+            },
+            "docArchiveRef": {
+              "type": "object",
+              "required": [
+                "accountTypestr",
+                "referenceTypeId"
+              ],
+              "properties": {
+                "accountTypestr": {
+                  "type": "string",
+                  "description": "Vendor, Customer or None",
+                  "enum": [
+                    "Vend",
+                    "Cust",
+                    "None"
+                  ]
+                },
+                "agreementId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "custVendAccount": {
+                  "type": "string"
+                },
+                "documentDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "documentId": {
+                  "type": "string"
+                },
+                "internalReference": {
+                  "type": "string"
+                },
+                "inventBatchId": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "projId": {
+                  "type": "string"
+                },
+                "quotationId": {
+                  "type": "string"
+                },
+                "referenceId": {
+                  "type": "string"
+                },
+                "referenceTypeId": {
+                  "type": "string",
+                  "description": "Validated against the list of Reference types in D365 F&O ECM Document Management"
+                },
+                "trader": {
+                  "type": "integer",
+                  "description": "RecId of the Worker entry in D365 F&O"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ScanFile": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "fileData": {
+              "type": "string",
+              "description": "base64 encoded file contents"
+            },
+            "companyId": {
+              "type": "string",
+              "description": "Legal entity in D365 F&O"
+            },
+            "docArchive": {
+              "type": "object",
+              "required": [
+                "fileName"
+              ],
+              "properties": {
+                "fileName": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "docArchiveRef": {
+              "type": "object",
+              "required": [
+                "barcodeId"
+              ],
+              "properties": {
+                "barcodeId": {
+                  "type": "string",
+                  "description": "Id of the barcode as generated in D365 F&O ECM Document Management."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "IndexFile": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "companyId": {
+              "type": "string",
+              "description": "Legal entity in D365 F&O"
+            },
+            "docArchive": {
+              "type": "object",
+              "required": [
+                "fileName",
+                "typeId"
+              ],
+              "properties": {
+                "fileName": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "fileUrl": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "typeId": {
+                  "type": "string",
+                  "description": "Validated against the list of Document types in D365 F&O ECM Document Management"
+                }
+              }
+            },
+            "docArchiveRef": {
+              "type": "object",
+              "properties": {
+                "accountTypestr": {
+                  "type": "string",
+                  "description": "Vendor, Customer or None",
+                  "enum": [
+                    "Vend",
+                    "Cust",
+                    "None"
+                  ]
+                },
+                "agreementId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "custVendAccount": {
+                  "type": "string"
+                },
+                "documentDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "documentId": {
+                  "type": "string"
+                },
+                "internalReference": {
+                  "type": "string"
+                },
+                "inventBatchId": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "projId": {
+                  "type": "string"
+                },
+                "quotationId": {
+                  "type": "string"
+                },
+                "referenceId": {
+                  "type": "string"
+                },
+                "referenceTypeId": {
+                  "type": "string",
+                  "description": "Validated against the list of Reference types in D365 F&O ECM Document Management"
+                },
+                "trader": {
+                  "type": "integer",
+                  "description": "RecId of the Worker entry in D365 F&O"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "CreateDocuArchiveRef": {
       "type": "object",
       "properties": {
