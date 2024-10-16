@@ -936,16 +936,19 @@
     "RouteCardLines": {
       "type": "object",
       "properties": {
+        "hours": {
+          "type": "number"
+        },
         "oprNum": {
           "type": "integer"
         },
         "prodId": {
           "type": "string"
         },
-        "hours": {
+        "qtyGood": {
           "type": "number"
         },
-        "qty": {
+        "qtyError": {
           "type": "number"
         },
         "transDate": {
