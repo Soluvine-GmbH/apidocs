@@ -1216,7 +1216,8 @@
               "type": "object",
               "required": [
                 "fileName",
-                "typeId"
+                "typeId",
+                "connectionId"
               ],
               "properties": {
                 "fileName": {
@@ -1232,6 +1233,10 @@
                 "typeId": {
                   "type": "string",
                   "description": "Validated against the list of Document types in D365 F&O ECM Document Management"
+                },
+                "connectionId": {
+                  "type": "string",
+                  "description": "Must match the Connection name in D365 F&O ECM Document Management"
                 }
               }
             },

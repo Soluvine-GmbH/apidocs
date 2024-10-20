@@ -721,6 +721,94 @@
         }
       }
     },
+    "/FXLInboundServices_Prod/FXLProdTableService/pickingList": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Creates a picking list for a production order material consumption",
+        "description": "",
+        "operationId": "pickingList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create a Picking List in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/PickingList"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableService/routeCard": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Creates a route card for a production order material consumption",
+        "description": "",
+        "operationId": "routeCard",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create a Picking List in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/RouteCard"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
     "/FXLInboundServices_WMS/FXLWMSJournalService/createWMSJournal": {
       "post": {
         "tags": [
@@ -811,6 +899,168 @@
     }
   },
   "definitions": {
+    "RouteCard": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "type": "object",
+              "properties": {
+                "prodId": {
+                  "type": "string"
+                },
+                "transDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "wrkCtrId": {
+                  "type": "string"
+                },
+                "lines": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/RouteCardLines"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RouteCardLines": {
+      "type": "object",
+      "properties": {
+        "hours": {
+          "type": "number"
+        },
+        "oprNum": {
+          "type": "integer"
+        },
+        "prodId": {
+          "type": "string"
+        },
+        "qtyGood": {
+          "type": "number"
+        },
+        "qtyError": {
+          "type": "number"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "wrkCtrId": {
+          "type": "string",
+          "description": "Resource id in D365 F&O"
+        }
+      }
+    },
+    "PickingList": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "type": "object",
+              "properties": {
+                "prodId": {
+                  "type": "string"
+                },
+                "transDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "wrkCtrId": {
+                  "type": "string"
+                },
+                "lines": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/PickingListLines"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "PickingListLines": {
+      "type": "object",
+      "properties": {
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string"
+            },
+            "colorId": {
+              "type": "string"
+            },
+            "configId": {
+              "type": "string"
+            },
+            "inventDimId": {
+              "type": "string"
+            },
+            "licensePlateId": {
+              "type": "string"
+            },
+            "locationId": {
+              "type": "string"
+            },
+            "palletId": {
+              "type": "string"
+            },
+            "serialId": {
+              "type": "string"
+            },
+            "siteId": {
+              "type": "string"
+            },
+            "sizeId": {
+              "type": "string"
+            },
+            "styleId": {
+              "type": "string"
+            },
+            "wmsLocationId": {
+              "type": "string"
+            }
+          }
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "oprNum": {
+          "type": "integer"
+        },
+        "prodId": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "number"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "wrkCtrId": {
+          "type": "string",
+          "description": "Resource id in D365 F&O"
+        }
+      }
+    },
     "AddFile": {
       "type": "object",
       "properties": {
