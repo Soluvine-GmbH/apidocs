@@ -721,7 +721,7 @@
         }
       }
     },
-    "/FXLInboundServices_Prod/FXLProdTableService/pickingList": {
+    "/FXLInboundServices_Prod/FXLProdJournalService/pickingList": {
       "post": {
         "tags": [
           "Production interfaces"
@@ -765,7 +765,7 @@
         }
       }
     },
-    "/FXLInboundServices_Prod/FXLProdTableService/routeCard": {
+    "/FXLInboundServices_Prod/FXLProdJournalService/routeCard": {
       "post": {
         "tags": [
           "Production interfaces"
@@ -920,13 +920,13 @@
                 },
                 "wrkCtrId": {
                   "type": "string"
-                },
-                "lines": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/RouteCardLines"
-                  }
                 }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RouteCardLines"
               }
             }
           }
@@ -982,13 +982,13 @@
                 },
                 "wrkCtrId": {
                   "type": "string"
-                },
-                "lines": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/PickingListLines"
-                  }
                 }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PickingListLines"
               }
             }
           }

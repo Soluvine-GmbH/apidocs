@@ -783,7 +783,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Create a Picking List in D365 F&O.",
+            "description": "Create a Route Card in D365 F&O.",
             "schema": {
               "$ref": "#/definitions/RouteCard"
             },
