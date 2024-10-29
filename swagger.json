@@ -2504,28 +2504,28 @@
               "type": "string",
               "format": "date-time"
             }
-          },
-          "example": {
-            "_contract": {
-              "endJob": false,
-              "inventLocationId": "001",
-              "itemId": "056-S",
-              "message": {
-                "applicationId": "ProdSystem",
-                "companyId": "usmf",
-                "description": "Production start message",
-                "messageId": "abcd-1234-efgh-5678",
-                "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
-              },
-              "processingTime": 181,
-              "prodId": "usmf-000027349",
-              "qtyError": 0,
-              "qtyGood": 1,
-              "resource": "MB-4 resource",
-              "timestampFinished": "2024-07-12T06:19:01.0440Z",
-              "timestampStarted": "2024-07-12T06:16:00.0010Z"
-            }
           }
+        }
+      },
+      "example": {
+        "_contract": {
+          "endJob": false,
+          "inventLocationId": "001",
+          "itemId": "056-S",
+          "message": {
+            "applicationId": "ProdSystem",
+            "companyId": "usmf",
+            "description": "Production start message",
+            "messageId": "abcd-1234-efgh-5678",
+            "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
+          },
+          "processingTime": 181,
+          "prodId": "usmf-000027349",
+          "qtyError": 0,
+          "qtyGood": 1,
+          "resource": "MB-4 resource",
+          "timestampFinished": "2024-07-12T06:19:01.0440Z",
+          "timestampStarted": "2024-07-12T06:16:00.0010Z"
         }
       }
     },
