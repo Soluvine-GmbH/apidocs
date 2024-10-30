@@ -904,12 +904,19 @@
       "properties": {
         "_contract": {
           "type": "object",
+          "required": [
+            "message",
+            "header"
+          ],
           "properties": {
             "message": {
               "$ref": "#/definitions/Message"
             },
             "header": {
               "type": "object",
+              "required": [
+                "transDate"
+              ],
               "properties": {
                 "prodId": {
                   "type": "string"
@@ -935,6 +942,15 @@
     },
     "RouteCardLines": {
       "type": "object",
+      "required": [
+        "hours",
+        "oprNum",
+        "prodId",
+        "qtyGood",
+        "qtyError",
+        "transDate",
+        "wrkCtrId"
+      ],
       "properties": {
         "hours": {
           "type": "number"
@@ -966,12 +982,19 @@
       "properties": {
         "_contract": {
           "type": "object",
+          "required": [
+            "message",
+            "header"
+          ],
           "properties": {
             "message": {
               "$ref": "#/definitions/Message"
             },
             "header": {
               "type": "object",
+              "required": [
+                "transDate"
+              ],
               "properties": {
                 "prodId": {
                   "type": "string"
@@ -997,6 +1020,13 @@
     },
     "PickingListLines": {
       "type": "object",
+      "required": [
+        "itemId",
+        "oprNum",
+        "prodId",
+        "qty",
+        "transDate"
+      ],
       "properties": {
         "inventDim": {
           "type": "object",
@@ -1655,6 +1685,12 @@
     },
     "Message": {
       "type": "object",
+      "required": [
+        "applicationId",
+        "companyId",
+        "messageId",
+        "messageTimeStamp"
+      ],
       "properties": {
         "applicationId": {
           "type": "string"
@@ -2380,6 +2416,10 @@
       "properties": {
         "_contract": {
           "type": "object",
+          "required": [
+            "message",
+            "prodId"
+          ],
           "properties": {
             "message": {
               "$ref": "#/definitions/Message"
@@ -2408,7 +2448,18 @@
       "properties": {
         "_contract": {
           "type": "object",
+          "required": [
+            "endjob",
+            "itemId",
+            "processingTime",
+            "prodId",
+            "qtyError",
+            "qtyGood"
+          ],
           "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
             "endjob": {
               "type": "boolean",
               "description": "true for Completed, false for Progress"
@@ -2418,9 +2469,6 @@
             },
             "itemId": {
               "type": "string"
-            },
-            "message": {
-              "$ref": "#/definitions/Message"
             },
             "processingTime": {
               "type": "number",
@@ -2436,15 +2484,20 @@
             "qtyGood": {
               "type": "number",
               "description": "Precision of two digits."
+            },
+            "timestampFinished": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "timestampStarted": {
+              "type": "string",
+              "format": "date-time"
             }
           }
         }
       },
       "example": {
         "_contract": {
-          "endJob": true,
-          "inventLocationId": "0001",
-          "itemId": "056-S",
           "message": {
             "applicationId": "ProdSystem",
             "companyId": "usmf",
@@ -2452,10 +2505,15 @@
             "messageId": "abcd-1234-efgh-5678",
             "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
           },
+          "endJob": true,
+          "inventLocationId": "0001",
+          "itemId": "056-S",
           "processingTime": 0,
           "prodId": "usmf-000027349",
           "qtyError": 0,
-          "qtyGood": 1
+          "qtyGood": 1,
+          "timestampFinished": "2024-07-12T06:19:01.0440Z",
+          "timestampStarted": "2024-07-12T06:16:00.0010Z"
         }
       }
     },
@@ -2464,6 +2522,14 @@
       "properties": {
         "_contract": {
           "type": "object",
+          "required": [
+            "endjob",
+            "itemId",
+            "processingTime",
+            "prodId",
+            "qtyError",
+            "qtyGood"
+          ],
           "properties": {
             "endjob": {
               "type": "boolean",
@@ -2509,9 +2575,6 @@
       },
       "example": {
         "_contract": {
-          "endJob": false,
-          "inventLocationId": "001",
-          "itemId": "056-S",
           "message": {
             "applicationId": "ProdSystem",
             "companyId": "usmf",
@@ -2519,6 +2582,9 @@
             "messageId": "abcd-1234-efgh-5678",
             "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
           },
+          "endJob": false,
+          "inventLocationId": "001",
+          "itemId": "056-S",
           "processingTime": 181,
           "prodId": "usmf-000027349",
           "qtyError": 0,
