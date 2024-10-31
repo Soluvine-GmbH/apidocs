@@ -2498,11 +2498,11 @@
             "companyId": "usmf",
             "description": "Production start message",
             "messageId": "abcd-1234-efgh-5678",
-            "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
+            "messageTimeStamp": "2024-07-12T10:19:01.0440Z"
           },
           "inventLocationId": "0001",
           "itemId": "056-S",
-          "processingTime": 0,
+          "processingTime": 180,
           "prodId": "usmf-000027349",
           "qtyError": 0,
           "qtyGood": 1,
@@ -2569,7 +2569,7 @@
             "companyId": "usmf",
             "description": "Optional message description",
             "messageId": "abcd-1234-efgh-5678",
-            "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
+            "messageTimeStamp": "2024-07-12T10:19:01.0440Z"
           },
           "inventLocationId": "001",
           "itemId": "056-S",

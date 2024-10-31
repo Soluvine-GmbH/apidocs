@@ -74,7 +74,7 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Upload a sales order",
+        "summary": "Upload a sales order.",
         "description": "",
         "operationId": "createSalesTable",
         "consumes": [
@@ -118,7 +118,7 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Update a sales order",
+        "summary": "Update a sales order.",
         "description": "",
         "operationId": "updateFile",
         "consumes": [
@@ -162,7 +162,7 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Create a purchase order",
+        "summary": "Create a purchase order.",
         "description": "",
         "operationId": "createPurchTable",
         "consumes": [
@@ -206,7 +206,7 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Confirm a purchase order",
+        "summary": "Confirm a purchase order.",
         "description": "",
         "operationId": "confirmPurchTable",
         "consumes": [
@@ -250,7 +250,7 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Create a purchase invoice",
+        "summary": "Create a purchase invoice.",
         "description": "",
         "operationId": "invoicePurchTable",
         "consumes": [
@@ -294,7 +294,7 @@
         "tags": [
           "OCR Vendor invoice"
         ],
-        "summary": "Create a vendor invoice",
+        "summary": "Create a vendor invoice.",
         "description": "",
         "operationId": "createVendInvoice",
         "consumes": [
@@ -338,7 +338,7 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Confirm a customer collection",
+        "summary": "Confirm a customer collection.",
         "description": "",
         "operationId": "confirmCollection",
         "consumes": [
@@ -374,7 +374,7 @@
         "tags": [
           "Document archive"
         ],
-        "summary": "Create document archive entry",
+        "summary": "Create document archive entry.",
         "description": "",
         "operationId": "createDocArchiveRefFXS",
         "consumes": [
@@ -418,7 +418,7 @@
         "tags": [
           "Document archive"
         ],
-        "summary": "Adds a file with it s contents and metadata to document archive",
+        "summary": "Adds a file with it s contents and metadata to document archive.",
         "description": "",
         "operationId": "addFile",
         "consumes": [
@@ -462,7 +462,7 @@
         "tags": [
           "Document archive"
         ],
-        "summary": "Adds a scanned file with barcode reference to document archive",
+        "summary": "Adds a scanned file with barcode reference to document archive.",
         "description": "",
         "operationId": "scanFile",
         "consumes": [
@@ -506,7 +506,7 @@
         "tags": [
           "Document archive"
         ],
-        "summary": "Indexes a file in document archive with metadata and link",
+        "summary": "Indexes a file in document archive with metadata and link.",
         "description": "",
         "operationId": "indexFile",
         "consumes": [
@@ -550,7 +550,7 @@
         "tags": [
           "BVBS interface"
         ],
-        "summary": "Imports a set of BVBS data",
+        "summary": "Imports a set of BVBS data.",
         "description": "",
         "operationId": "importBVBSFile",
         "consumes": [
@@ -594,7 +594,7 @@
         "tags": [
           "Production interfaces"
         ],
-        "summary": "Reports a Production order is started",
+        "summary": "Reports a Production order is started.",
         "description": "",
         "operationId": "start",
         "consumes": [
@@ -638,7 +638,7 @@
         "tags": [
           "Production interfaces"
         ],
-        "summary": "Reports progress of a Production order",
+        "summary": "Reports produced quantities of a production order without ending it.",
         "description": "",
         "operationId": "reportAsFinishedProgress",
         "consumes": [
@@ -651,7 +651,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Progress of a Production Order in D365 F&O.",
+            "description": "Reports produced quantities of a production order without ending it.",
             "schema": {
               "$ref": "#/definitions/ProductionProgress"
             },
@@ -682,7 +682,7 @@
         "tags": [
           "Production interfaces"
         ],
-        "summary": "Reports a Production order is finished",
+        "summary": "Reports produced quantities of a production order and ends it.",
         "description": "",
         "operationId": "reportAsFinishedCompleted",
         "consumes": [
@@ -695,7 +695,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Finish Production Order in D365 F&O.",
+            "description": "Reports produced quantities of a production order and ends it.",
             "schema": {
               "$ref": "#/definitions/ProductionFinished"
             },
@@ -726,7 +726,7 @@
         "tags": [
           "Production interfaces"
         ],
-        "summary": "Creates a picking list for a production order material consumption",
+        "summary": "Creates a picking list for production orders material consumption.",
         "description": "",
         "operationId": "pickingList",
         "consumes": [
@@ -739,7 +739,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Create a Picking List in D365 F&O.",
+            "description": "Creates a picking list for production orders material consumption.",
             "schema": {
               "$ref": "#/definitions/PickingList"
             },
@@ -770,7 +770,7 @@
         "tags": [
           "Production interfaces"
         ],
-        "summary": "Creates a route card for a production order material consumption",
+        "summary": "Creates a route card to record time for production orders.",
         "description": "",
         "operationId": "routeCard",
         "consumes": [
@@ -783,7 +783,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Create a Route Card in D365 F&O.",
+            "description": "Creates a route card to record time for production orders.",
             "schema": {
               "$ref": "#/definitions/RouteCard"
             },
@@ -814,7 +814,7 @@
         "tags": [
           "Warehouse interfaces"
         ],
-        "summary": "Creates item arrival journal",
+        "summary": "Creates item arrival journal.",
         "description": "",
         "operationId": "createWMSJournal",
         "consumes": [
@@ -2449,7 +2449,6 @@
         "_contract": {
           "type": "object",
           "required": [
-            "endjob",
             "itemId",
             "processingTime",
             "prodId",
@@ -2459,10 +2458,6 @@
           "properties": {
             "message": {
               "$ref": "#/definitions/Message"
-            },
-            "endjob": {
-              "type": "boolean",
-              "description": "true for Completed, false for Progress"
             },
             "inventLocationId": {
               "type": "string"
@@ -2505,7 +2500,6 @@
             "messageId": "abcd-1234-efgh-5678",
             "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
           },
-          "endJob": true,
           "inventLocationId": "0001",
           "itemId": "056-S",
           "processingTime": 0,
@@ -2523,7 +2517,6 @@
         "_contract": {
           "type": "object",
           "required": [
-            "endjob",
             "itemId",
             "processingTime",
             "prodId",
@@ -2531,10 +2524,6 @@
             "qtyGood"
           ],
           "properties": {
-            "endjob": {
-              "type": "boolean",
-              "description": "true for Completed, false for Progress"
-            },
             "inventLocationId": {
               "type": "string"
             },
@@ -2578,11 +2567,10 @@
           "message": {
             "applicationId": "ProdSystem",
             "companyId": "usmf",
-            "description": "Production start message",
+            "description": "Optional message description",
             "messageId": "abcd-1234-efgh-5678",
             "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
           },
-          "endJob": false,
           "inventLocationId": "001",
           "itemId": "056-S",
           "processingTime": 181,
