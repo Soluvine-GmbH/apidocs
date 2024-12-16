@@ -2450,6 +2450,7 @@
           "type": "object",
           "required": [
             "itemId",
+            "processingTime",
             "prodId",
             "qtyError",
             "qtyGood"
@@ -2517,6 +2518,7 @@
           "type": "object",
           "required": [
             "itemId",
+            "processingTime",
             "prodId",
             "qtyError",
             "qtyGood"
