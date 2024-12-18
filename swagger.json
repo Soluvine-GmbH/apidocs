@@ -2368,25 +2368,6 @@
             }
           }
         }
-      },
-      "example": {
-        "_contract": {
-          "message": {
-            "applicationId": "ProdSystem",
-            "companyId": "usmf",
-            "description": "Production start message",
-            "messageId": "abcd-1234-efgh-5678",
-            "messageTimeStamp": "2024-07-12T10:19:01.0440Z"
-          },
-          "inventLocationId": "0001",
-          "itemId": "056-S",
-          "processingTime": 180,
-          "prodId": "usmf-000027349",
-          "qtyError": 0,
-          "qtyGood": 1,
-          "timestampFinished": "2024-07-12T06:19:01.0440Z",
-          "timestampStarted": "2024-07-12T06:16:00.0010Z"
-        }
       }
     },
     "ProductionProgress": {
@@ -2448,26 +2429,6 @@
               "type": "string"
             }
           }
-        }
-      },
-      "example": {
-        "_contract": {
-          "message": {
-            "applicationId": "ProdSystem",
-            "companyId": "usmf",
-            "description": "Optional message description",
-            "messageId": "abcd-1234-efgh-5678",
-            "messageTimeStamp": "2024-07-12T10:19:01.0440Z"
-          },
-          "inventLocationId": "001",
-          "itemId": "056-S",
-          "processingTime": 181,
-          "prodId": "usmf-000027349",
-          "qtyError": 0,
-          "qtyGood": 1,
-          "resource": "MB-4 resource",
-          "timestampFinished": "2024-07-12T06:19:01.0440Z",
-          "timestampStarted": "2024-07-12T06:16:00.0010Z"
         }
       }
     },
