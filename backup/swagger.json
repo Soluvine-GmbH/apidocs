@@ -25,14 +25,6 @@
       }
     },
     {
-      "name": "OCR Vendor invoice",
-      "description": "Endpoint to integrate data from OCR invoices.",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "https://soluvine.com/flexxstore/"
-      }
-    },
-    {
       "name": "Document archive",
       "description": "Endpoint to archive documents in D365 F&O.",
       "externalDocs": {
@@ -289,50 +281,6 @@
         }
       }
     },
-    "/FXLInboundServices_OCR/FXLVendInvoiceService/createVendInvoice": {
-      "post": {
-        "tags": [
-          "OCR Vendor invoice"
-        ],
-        "summary": "Create a vendor invoice.",
-        "description": "",
-        "operationId": "createVendInvoice",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "An invoice for a purchase order.",
-            "schema": {
-              "$ref": "#/definitions/CreateVendInvoice"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/ApiResponse"
-            }
-          },
-          "400": {
-            "description": "bad request structure",
-            "schema": {
-              "$ref": "#/definitions/Api400Response"
-            }
-          },
-          "404": {
-            "description": "not found"
-          }
-        }
-      }
-    },
     "/FXLInboundServices_B2B/FXLCustCollectionService/confirmCollection": {
       "post": {
         "tags": [
@@ -364,51 +312,6 @@
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
-          }
-        }
-      }
-    },
-    "/FXSInboundServices/FXSDocArchiveService/createDocArchiveRef": {
-      "post": {
-        "deprecated": true,
-        "tags": [
-          "Document archive"
-        ],
-        "summary": "Create document archive entry.",
-        "description": "",
-        "operationId": "createDocArchiveRefFXS",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "An entry in the document archive.",
-            "schema": {
-              "$ref": "#/definitions/CreateDocuArchiveRefFXS"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/ApiResponse"
-            }
-          },
-          "400": {
-            "description": "bad request structure",
-            "schema": {
-              "$ref": "#/definitions/Api400Response"
-            }
-          },
-          "404": {
-            "description": "not found"
           }
         }
       }
@@ -809,6 +712,50 @@
         }
       }
     },
+    "/FXLInboundServices_Prod/FXLProdJournalService/jobCard": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Creates a job card to record time for production orders.",
+        "description": "",
+        "operationId": "jobCard",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates a job card to record time for production orders.",
+            "schema": {
+              "$ref": "#/definitions/JobCard"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
     "/FXLInboundServices_WMS/FXLWMSJournalService/createWMSJournal": {
       "post": {
         "tags": [
@@ -899,7 +846,7 @@
     }
   },
   "definitions": {
-    "RouteCard": {
+    "JobCard": {
       "type": "object",
       "properties": {
         "_contract": {
@@ -919,14 +866,122 @@
               ],
               "properties": {
                 "prodId": {
-                  "type": "string"
-                },
-                "transDate": {
                   "type": "string",
-                  "format": "date"
+                  "description": "The value from the header will be used (1) on the line in case no value is given on the line, (2) for Production journals header Production Id value."
                 },
                 "wrkCtrId": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "The value from the header will be used on the line in case no value is given on the line."
+                }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobCardLines"
+              }
+            }
+          }
+        }
+      }
+    },
+    "JobCardLines": {
+      "type": "object",
+      "required": [
+        "hours",
+        "jobId",
+        "transDate"
+      ],
+      "properties": {
+        "hours": {
+          "type": "number"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "prodId": {
+          "type": "string"
+        },
+        "qtyError": {
+          "type": "number"
+        },
+        "qtyGood": {
+          "type": "number"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "wrkCtrId": {
+          "type": "string",
+          "description": "Resource id in D365 F&O. If not provided, it is retrieved using jobId."
+        },
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string"
+            },
+            "colorId": {
+              "type": "string"
+            },
+            "configId": {
+              "type": "string"
+            },
+            "licensePlateId": {
+              "type": "string"
+            },
+            "locationId": {
+              "type": "string"
+            },
+            "ownerId": {
+              "type": "string"
+            },
+            "serialId": {
+              "type": "string"
+            },
+            "siteId": {
+              "type": "string"
+            },
+            "sizeId": {
+              "type": "string"
+            },
+            "statusId": {
+              "type": "string"
+            },
+            "styleId": {
+              "type": "string"
+            },
+            "wmsLocationId": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "RouteCard": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "header"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "type": "object",
+              "properties": {
+                "prodId": {
+                  "type": "string",
+                  "description": "The value from the header will be used (1) on the line in case no value is given on the line, (2) for Production journals header Production Id value."
+                },
+                "wrkCtrId": {
+                  "type": "string",
+                  "description": "The value from the header will be used on the line in case no value is given on the line."
                 }
               }
             },
@@ -943,29 +998,31 @@
     "RouteCardLines": {
       "type": "object",
       "required": [
-        "hours",
         "oprNum",
-        "prodId",
         "qtyGood",
-        "qtyError",
-        "transDate",
-        "wrkCtrId"
+        "transDate"
       ],
       "properties": {
         "hours": {
-          "type": "number"
+          "type": "number",
+          "description": "Hours or one of qty fields is mandatory."
         },
         "oprNum": {
           "type": "integer"
+        },
+        "oprPriority": {
+          "type": "string"
         },
         "prodId": {
           "type": "string"
         },
         "qtyGood": {
-          "type": "number"
+          "type": "number",
+          "description": "Hours or one of qty fields is mandatory."
         },
         "qtyError": {
-          "type": "number"
+          "type": "number",
+          "description": "Hours or one of qty fields is mandatory."
         },
         "transDate": {
           "type": "string",
@@ -992,19 +1049,14 @@
             },
             "header": {
               "type": "object",
-              "required": [
-                "transDate"
-              ],
               "properties": {
                 "prodId": {
-                  "type": "string"
-                },
-                "transDate": {
                   "type": "string",
-                  "format": "date"
+                  "description": "The value from the header will be used (1) on the line in case no value is given on the line, (2) for Production journals header Production Id value."
                 },
                 "wrkCtrId": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "The value from the header will be used on the line in case no value is given on the line."
                 }
               }
             },
@@ -1022,8 +1074,6 @@
       "type": "object",
       "required": [
         "itemId",
-        "oprNum",
-        "prodId",
         "qty",
         "transDate"
       ],
@@ -1049,7 +1099,7 @@
             "locationId": {
               "type": "string"
             },
-            "palletId": {
+            "ownerId": {
               "type": "string"
             },
             "serialId": {
@@ -1059,6 +1109,9 @@
               "type": "string"
             },
             "sizeId": {
+              "type": "string"
+            },
+            "statusId": {
               "type": "string"
             },
             "styleId": {
@@ -1072,9 +1125,6 @@
         "itemId": {
           "type": "string"
         },
-        "oprNum": {
-          "type": "integer"
-        },
         "prodId": {
           "type": "string"
         },
@@ -1087,7 +1137,7 @@
         },
         "wrkCtrId": {
           "type": "string",
-          "description": "Resource id in D365 F&O"
+          "description": "Resource id in D365 F&O. If Site, Warehouse and Location are empty, then input location from wrkCtrId is used."
         }
       }
     },
@@ -1325,191 +1375,6 @@
                   "description": "RecId of the Worker entry in D365 F&O"
                 }
               }
-            }
-          }
-        }
-      }
-    },
-    "CreateDocuArchiveRefFXS": {
-      "type": "object",
-      "properties": {
-        "_contract": {
-          "type": "object",
-          "properties": {
-            "companyId": {
-              "type": "string"
-            },
-            "fileData": {
-              "type": "string",
-              "description": "base64 encoded file contents"
-            },
-            "docArchive": {
-              "type": "object",
-              "properties": {
-                "description": {
-                  "type": "string"
-                },
-                "externalDocTypeId": {
-                  "type": "string",
-                  "enum": [
-                    "Purch invoice",
-                    "VALUE2",
-                    "VALUEN"
-                  ]
-                }
-              }
-            },
-            "docArchiveRef": {
-              "type": "object",
-              "properties": {
-                "accountTypestr": {
-                  "type": "string",
-                  "description": "Vendor or Customer",
-                  "enum": [
-                    "Vend",
-                    "Cust",
-                    "None"
-                  ]
-                },
-                "agreementId": {
-                  "type": "string"
-                },
-                "barcodeId": {
-                  "type": "string",
-                  "description": "Dedicated to barcode handling. If barcode is sent, the following values are taken from D365 only: accountTypestr, custVendAccount, orderTypeStr, orderId, agreementId, documentDate, documentId, inventBatchId, projId, quotationId, assetId."
-                },
-                "custVendAccount": {
-                  "type": "string"
-                },
-                "documentCreatedDateTime": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "documentDate": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "documentId": {
-                  "type": "string"
-                },
-                "fileId": {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                "fileName": {
-                  "type": "string"
-                },
-                "filePath": {
-                  "type": "string"
-                },
-                "fileUrl": {
-                  "type": "string"
-                },
-                "inventBatchId": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "orderTypeStr": {
-                  "type": "string",
-                  "enum": [
-                    "None",
-                    "PurchOrder",
-                    "PurchAgreement",
-                    "SalesOrder",
-                    "SalesAgreement",
-                    "SalesQuotation",
-                    "TransferOrder",
-                    "WMSJournalTable",
-                    "CustCollectionLetter"
-                  ]
-                },
-                "projId": {
-                  "type": "string"
-                },
-                "quotationId": {
-                  "type": "string"
-                },
-                "assetId": {
-                  "type": "string"
-                },
-                "trader": {
-                  "type": "integer"
-                },
-                "connectionId": {
-                  "type": "string",
-                  "description": "Name of the connection as defined in D365. Used with the fileUrl value."
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "CreateVendInvoice": {
-      "type": "object",
-      "properties": {
-        "_contract": {
-          "type": "object",
-          "properties": {
-            "message": {
-              "$ref": "#/definitions/Message"
-            },
-            "companyId": {
-              "type": "string"
-            },
-            "currencyCode": {
-              "type": "string"
-            },
-            "documentDate": {
-              "type": "string",
-              "format": "date"
-            },
-            "documentId": {
-              "type": "string",
-              "description": "Internal FlexxLink document number."
-            },
-            "fileData": {
-              "type": "string",
-              "format": "byte",
-              "description": "Base64 encoded document. Accepts PDF, MSG, TIFF, JPG."
-            },
-            "fileName": {
-              "type": "string"
-            },
-            "iBAN": {
-              "type": "string"
-            },
-            "invoiceAccount": {
-              "type": "string"
-            },
-            "invoiceAmount": {
-              "type": "number",
-              "description": "Precision of two decimals."
-            },
-            "num": {
-              "type": "string",
-              "description": "Invoice number."
-            },
-            "orderAccount": {
-              "type": "string"
-            },
-            "purchId": {
-              "type": "string"
-            },
-            "purchName": {
-              "type": "string"
-            },
-            "taxAmount": {
-              "type": "number",
-              "description": "Precision of two decimals"
-            },
-            "vATNum": {
-              "type": "string"
-            },
-            "vendReference": {
-              "type": "string"
             }
           }
         }
@@ -2449,7 +2314,6 @@
         "_contract": {
           "type": "object",
           "required": [
-            "itemId",
             "prodId",
             "qtyError",
             "qtyGood"
@@ -2479,6 +2343,10 @@
               "type": "number",
               "description": "Precision of two digits."
             },
+            "resource": {
+              "type": "string",
+              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job"
+            },
             "timestampFinished": {
               "type": "string",
               "format": "date-time"
@@ -2486,27 +2354,19 @@
             "timestampStarted": {
               "type": "string",
               "format": "date-time"
+            },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "statusId": {
+                  "type": "string"
+                }
+              }
+            },
+            "jobId": {
+              "type": "string"
             }
           }
-        }
-      },
-      "example": {
-        "_contract": {
-          "message": {
-            "applicationId": "ProdSystem",
-            "companyId": "usmf",
-            "description": "Production start message",
-            "messageId": "abcd-1234-efgh-5678",
-            "messageTimeStamp": "2024-07-12T10:19:01.0440Z"
-          },
-          "inventLocationId": "0001",
-          "itemId": "056-S",
-          "processingTime": 180,
-          "prodId": "usmf-000027349",
-          "qtyError": 0,
-          "qtyGood": 1,
-          "timestampFinished": "2024-07-12T06:19:01.0440Z",
-          "timestampStarted": "2024-07-12T06:16:00.0010Z"
         }
       }
     },
@@ -2516,7 +2376,6 @@
         "_contract": {
           "type": "object",
           "required": [
-            "itemId",
             "prodId",
             "qtyError",
             "qtyGood"
@@ -2547,7 +2406,8 @@
               "description": "Precision of two digits."
             },
             "resource": {
-              "type": "string"
+              "type": "string",
+              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job"
             },
             "timestampFinished": {
               "type": "string",
@@ -2556,28 +2416,19 @@
             "timestampStarted": {
               "type": "string",
               "format": "date-time"
+            },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "statusId": {
+                  "type": "string"
+                }
+              }
+            },
+            "jobId": {
+              "type": "string"
             }
           }
-        }
-      },
-      "example": {
-        "_contract": {
-          "message": {
-            "applicationId": "ProdSystem",
-            "companyId": "usmf",
-            "description": "Optional message description",
-            "messageId": "abcd-1234-efgh-5678",
-            "messageTimeStamp": "2024-07-12T10:19:01.0440Z"
-          },
-          "inventLocationId": "001",
-          "itemId": "056-S",
-          "processingTime": 181,
-          "prodId": "usmf-000027349",
-          "qtyError": 0,
-          "qtyGood": 1,
-          "resource": "MB-4 resource",
-          "timestampFinished": "2024-07-12T06:19:01.0440Z",
-          "timestampStarted": "2024-07-12T06:16:00.0010Z"
         }
       }
     },

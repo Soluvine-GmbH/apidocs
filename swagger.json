@@ -624,6 +624,50 @@
         }
       }
     },
+    "/FXLInboundServices_Prod/FXLProdTableService/statusDecrease": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Reports status change of a production order.",
+        "description": "",
+        "operationId": "statusDecrease",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reports status change of a production order.",
+            "schema": {
+              "$ref": "#/definitions/StatusDecrease"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
     "/FXLInboundServices_Prod/FXLProdJournalService/pickingList": {
       "post": {
         "tags": [
@@ -846,6 +890,42 @@
     }
   },
   "definitions": {
+    "StatusDecrease": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "prodId": {
+              "type": "string",
+              "description": "Number of the production order."
+            },
+            "prodStatus": {
+              "type": "string",
+              "description": "Status of a production order that should be set. See enum for possible values.",
+              "enum": [
+                "Created",
+                "CostEstimated",
+                "Scheduled",
+                "Released",
+                "StartedUp",
+                "ReportedFinished",
+                "Completed"
+              ]
+            },
+            "reverseDerivedProd": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
     "JobCard": {
       "type": "object",
       "properties": {
