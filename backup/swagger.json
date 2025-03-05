@@ -1341,8 +1341,9 @@
                 "fileName": {
                   "type": "string"
                 },
-                "name": {
-                  "type": "string"
+                "scanTypeId": {
+                  "type": "string",
+                  "description": "Use only if Scan type is defined and required."
                 }
               }
             },
