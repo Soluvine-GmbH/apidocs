@@ -101,6 +101,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -145,6 +151,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -189,6 +201,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -233,6 +251,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -277,6 +301,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -311,6 +341,21 @@
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
             }
           }
         }
@@ -356,6 +401,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -400,6 +451,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -444,6 +501,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -488,6 +551,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -532,6 +601,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -576,6 +651,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -620,6 +701,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -664,6 +751,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -708,6 +801,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -752,6 +851,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -796,6 +901,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -840,6 +951,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -884,6 +1001,12 @@
           },
           "404": {
             "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
           }
         }
       }
@@ -2696,12 +2819,13 @@
       "type": "object",
       "properties": {
         "$id": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
         "status": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
         },
         "jobId": {
           "type": "string"
@@ -2717,6 +2841,7 @@
       "example": {
         "$id": "1",
         "status": "200",
+        "message": "Importierte Bestelldaten",
         "jobId": "2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770",
         "jobStatus": "2",
         "JobMessage": "Job '2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770' has been processed succesfully."
@@ -2739,6 +2864,25 @@
         "Message": "An exception occured when deserializing the request - Exception occurred when parsing and deserializing parameter '_contract' - 'Parameter '_contract' is not found within the request content body.",
         "ExceptionType": "XppServicesDeserializationException",
         "ActivityId": "15eeee57-9ac2-0001-4325-ef15c29ad901"
+      }
+    },
+    "Api500Response": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string"
+        },
+        "ExceptionType": {
+          "type": "string"
+        },
+        "ActivityId": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "Message": "An exception occured when invoking the operation - Schnittstelle PurchTableCreate_WS Verarbeitung FXLIntegrationProcess_In_PurchTableCreate ist nicht aktiv oder Integrationsteilnehmer nicht identifiziert (Die Suche nach dem Integrationspartner erfolgt über eine Kombination aus Schnittstelle, Konto/GLN/Barcode und Anwendung).",
+        "ExceptionType": "ErrorException",
+        "ActivityId": "15eeee57-9ac2-0001-4325-ef15c29ad902"
       }
     }
   },

@@ -1010,9 +1010,83 @@
           }
         }
       }
+    },
+    "/FXLInboundServices/FXLIntegrationStatusLogService/getStatus": {
+      "post": {
+        "tags": [
+          "Status log interface"
+        ],
+        "summary": "Retrieve status and log information of a FlexxLink message.",
+        "description": "",
+        "operationId": "getStaus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Retrieves status and log information of a FlexxLink message.",
+            "schema": {
+              "$ref": "#/definitions/GetStatus"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiStatusResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "GetStatus": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "integrationJobId": {
+              "type": "string",
+              "description": "Use integrationJobId or messageId to get the status and log information. If both are provided, integrationJobId is used to get the information."
+            },
+            "messageId": {
+              "type": "string",
+              "description": "Use integrationJobId or messageId to get the status and log information. If both are provided, integrationJobId is used to get the information."
+            }
+          }
+        }
+      }
+    },
     "StatusDecrease": {
       "type": "object",
       "properties": {
@@ -2883,6 +2957,127 @@
         "Message": "An exception occured when invoking the operation - Schnittstelle PurchTableCreate_WS Verarbeitung FXLIntegrationProcess_In_PurchTableCreate ist nicht aktiv oder Integrationsteilnehmer nicht identifiziert (Die Suche nach dem Integrationspartner erfolgt über eine Kombination aus Schnittstelle, Konto/GLN/Barcode und Anwendung).",
         "ExceptionType": "ErrorException",
         "ActivityId": "15eeee57-9ac2-0001-4325-ef15c29ad902"
+      }
+    },
+    "ApiStatusResponse": {
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "logStatus": {
+          "type": "object",
+          "properties": {
+            "$id": {
+              "type": "string"
+            },
+            "validationErrors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValidationErrors"
+              }
+            },
+            "logDateTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "integrationJobId": {
+              "type": "string"
+            },
+            "logStatus": {
+              "type": "integer"
+            },
+            "logStatusStr": {
+              "type": "string"
+            },
+            "logMessage": {
+              "type": "string"
+            },
+            "errorCode": {
+              "type": "string"
+            },
+            "messageId": {
+              "type": "string"
+            },
+            "eventName": {
+              "type": "string"
+            },
+            "logRecId": {
+              "type": "number"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "jobStatus": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "jobMessage": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "$id": "1",
+        "logStatus": {
+          "$id": "2",
+          "validationErrors": [
+            {
+              "$id": 3,
+              "validationResultStr": "Error",
+              "logText": "Correct Country/region must be specified; Correct ZIP/postal code must be specified; Correct Street must be specified",
+              "errorCode": ""
+            },
+            {
+              "$id": 4,
+              "validationResultStr": "Error",
+              "logText": "Receive date must be later than or equal to the ship date.",
+              "errorCode": ""
+            }
+          ],
+          "logDateTime": "2025-03-18T21:38:45.000Z",
+          "integrationJobId": "2025-03-18T22:38:38-48DE416636BA42F59EEF1567C1331B6F",
+          "logStatus": 9,
+          "logStatusStr": "Job processed",
+          "logMessage": null,
+          "errorCode": null,
+          "messageId": null,
+          "eventName": "SalesTableCreate_WS",
+          "logRecId": 5637144579,
+          "message": null
+        },
+        "status": "200",
+        "message": "Integration status retrieved",
+        "jobId": "2025-03-18T22:50:58-C939790BCA784CC8B2D35ACD83F7F8D1",
+        "jobStatus": "2",
+        "JobMessage": "Job '2025-03-18T22:50:58-C939790BCA784CC8B2D35ACD83F7F8D1' has been processed succesfully.   "
+      }
+    },
+    "ValidationErrors": {
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "validationResultStr": {
+          "type": "string"
+        },
+        "logText": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        }
       }
     }
   },
