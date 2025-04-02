@@ -1197,40 +1197,52 @@
           "type": "object",
           "properties": {
             "batchId": {
-              "type": "string"
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
             },
             "colorId": {
-              "type": "string"
+              "type": "string",
+              "description": "Product dimension: Color"
             },
             "configId": {
-              "type": "string"
+              "type": "string",
+              "description": "Product dimension: Configuration"
             },
             "licensePlateId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: License plate"
             },
             "locationId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
             },
             "ownerId": {
-              "type": "string"
+              "type": "string",
+              "description": "Tracking dimension: Owner"
             },
             "serialId": {
-              "type": "string"
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
             },
             "siteId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Site"
             },
             "sizeId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Size"
             },
             "statusId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
             },
             "styleId": {
-              "type": "string"
+              "type": "string",
+              "description": "Product dimension: Style"
             },
             "wmsLocationId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Location"
             }
           }
         }
@@ -1359,43 +1371,52 @@
           "type": "object",
           "properties": {
             "batchId": {
-              "type": "string"
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
             },
             "colorId": {
-              "type": "string"
+              "type": "string",
+              "description": "Product dimension: Color"
             },
             "configId": {
-              "type": "string"
-            },
-            "inventDimId": {
-              "type": "string"
+              "type": "string",
+              "description": "Product dimension: Configuration"
             },
             "licensePlateId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: License plate"
             },
             "locationId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
             },
             "ownerId": {
-              "type": "string"
+              "type": "string",
+              "description": "Tracking dimension: Owner"
             },
             "serialId": {
-              "type": "string"
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
             },
             "siteId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Site"
             },
             "sizeId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Size"
             },
             "statusId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
             },
             "styleId": {
-              "type": "string"
+              "type": "string",
+              "description": "Product dimension: Style"
             },
             "wmsLocationId": {
-              "type": "string"
+              "type": "string",
+              "description": "Storage dimension: Location"
             }
           }
         },
@@ -2594,7 +2615,9 @@
           "required": [
             "prodId",
             "qtyError",
-            "qtyGood"
+            "qtyGood",
+            "timestampStarted",
+            "timestampFinished"
           ],
           "properties": {
             "message": {
@@ -2608,7 +2631,7 @@
             },
             "processingTime": {
               "type": "number",
-              "description": "Precision of two digits. Unit defined in D365."
+              "description": "Precision of two digits. Unit defined in D365. If provided, must match delta of timestampStarted and timestampFinished."
             },
             "prodId": {
               "type": "string"
@@ -2636,8 +2659,53 @@
             "inventDim": {
               "type": "object",
               "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
                 "statusId": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
                 }
               }
             },
@@ -2656,7 +2724,9 @@
           "required": [
             "prodId",
             "qtyError",
-            "qtyGood"
+            "qtyGood",
+            "timestampStarted",
+            "timestampFinished"
           ],
           "properties": {
             "inventLocationId": {
@@ -2670,7 +2740,7 @@
             },
             "processingTime": {
               "type": "number",
-              "description": "Precision of two digits. Unit defined in D365."
+              "description": "Precision of two digits. Unit defined in D365. If provided, must match delta of timestampStarted and timestampFinished."
             },
             "prodId": {
               "type": "string"
@@ -2698,8 +2768,53 @@
             "inventDim": {
               "type": "object",
               "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
                 "statusId": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
                 }
               }
             },
