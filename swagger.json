@@ -1420,6 +1420,9 @@
             }
           }
         },
+        "inventTransId": {
+          "type": "string"
+        },
         "itemId": {
           "type": "string"
         },
