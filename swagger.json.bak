@@ -1422,7 +1422,6 @@
         },
         "inventTransId": {
           "type": "string"
-		  "description": "LotId in Dynamics 365"
         },
         "itemId": {
           "type": "string"
