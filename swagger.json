@@ -1166,8 +1166,7 @@
       "type": "object",
       "required": [
         "hours",
-        "jobId",
-        "transDate"
+        "jobId"
       ],
       "properties": {
         "hours": {
@@ -1422,7 +1421,7 @@
         },
         "inventTransId": {
           "type": "string",
-		  "description": "LotId in Dynamics 365"
+          "description": "LotId in Dynamics 365"
         },
         "itemId": {
           "type": "string"
@@ -3104,7 +3103,8 @@
               "type": "string"
             },
             "logStatus": {
-              "type": "integer"
+              "type": "integer",
+              "description": "None => 0 <br />  Job Pending => 11 <br />  Job Processing => 12 <br /> Job Processed => 13 <br /> Job Retry => 14 <br /> Job Error => 15 <br /> Import Imported => 21 <br /> Import Validated => 22 <br /> Import Posted => 23 <br /> Import Validation Error => 24 <br /> Import Posting Error => 25 <br /> Import Cancelled => 26 <br /> Import Approved => 27 <br /> Import Rejected => 28"
             },
             "logStatusStr": {
               "type": "string"
@@ -3139,6 +3139,7 @@
           "type": "string"
         },
         "jobStatus": {
+          "description": "None => 0 <br />  Pending => 11 <br />  Processing => 12 <br /> Processed => 13 <br /> Retry => 14 <br /> Error => 15",
           "type": "integer",
           "format": "int32"
         },
