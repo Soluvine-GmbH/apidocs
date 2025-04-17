@@ -390,7 +390,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/ApiResponse"
+              "$ref": "#/definitions/ApiArchiveResponse"
             }
           },
           "400": {
@@ -440,7 +440,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/ApiResponse"
+              "$ref": "#/definitions/ApiArchiveResponse"
             }
           },
           "400": {
@@ -3037,6 +3037,25 @@
         "jobId": "2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770",
         "jobStatus": "2",
         "JobMessage": "Job '2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770' has been processed succesfully."
+      }
+    },
+    "ApiArchiveResponse": {
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "docArchiveId": {
+          "type": "string"
+        },
+        "docTypeId": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "$id": "1",
+        "docArchiveId": "USMF-0060280",
+        "docTypeId": "Expense receipt"
       }
     },
     "Api400Response": {
