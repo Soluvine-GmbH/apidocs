@@ -3024,7 +3024,8 @@
         },
         "jobStatus": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "None => 0 <br />  Pending => 11 <br />  Processing => 12 <br /> Processed => 13 <br /> Retry => 14 <br /> Error => 15"
         },
         "jobMessage": {
           "type": "string"
@@ -3035,7 +3036,7 @@
         "status": "200",
         "message": "Importierte Bestelldaten",
         "jobId": "2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770",
-        "jobStatus": "2",
+        "jobStatus": "13",
         "JobMessage": "Job '2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770' has been processed succesfully."
       }
     },
