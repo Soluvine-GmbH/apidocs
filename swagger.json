@@ -1308,7 +1308,8 @@
           "description": "If true, sets operation to completed."
         },
         "oprNum": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Defines where the operation occurs in the sequence of operations for the production."
         },
         "oprPriority": {
           "type": "integer",
@@ -1461,6 +1462,10 @@
         "wrkCtrId": {
           "type": "string",
           "description": "Resource id in D365 F&O. If Site, Warehouse and Location are empty, then input location from wrkCtrId is used."
+        },
+        "oprNum": {
+          "type": "integer",
+          "description": "Defines where the operation occurs in the sequence of operations for the production."
         }
       }
     },

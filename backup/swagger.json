@@ -1172,8 +1172,16 @@
         "hours": {
           "type": "number"
         },
+        "jobFinished": {
+          "type": "boolean",
+          "description": "If true, sets job to finished."
+        },
         "jobId": {
           "type": "string"
+        },
+        "oprFinished": {
+          "type": "boolean",
+          "description": "If true, sets operation to completed."
         },
         "prodId": {
           "type": "string"
@@ -1295,11 +1303,25 @@
           "type": "number",
           "description": "Hours or one of qty fields is mandatory."
         },
+        "oprFinished": {
+          "type": "boolean",
+          "description": "If true, sets operation to completed."
+        },
         "oprNum": {
           "type": "integer"
         },
         "oprPriority": {
-          "type": "string"
+          "type": "integer",
+          "description": "Operation priority <br /> 0 - Primary operation <br /> 1 - Secondary operation 1 <br /> 2 - Secondary operation 2 <br /> 3 - Secondary operation 3 <br /> 4 - Secondary operation 4 <br /> 5 - Secondary operation 5 <br /> 6 - Secondary operation 6",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
         },
         "prodId": {
           "type": "string"
@@ -2593,6 +2615,10 @@
             },
             "prodId": {
               "type": "string"
+            },
+            "qtyStart": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         }
@@ -2606,7 +2632,8 @@
             "messageId": "abcd-1234-efgh-5678",
             "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
           },
-          "prodId": "usmf-000027349"
+          "prodId": "usmf-000027349",
+          "qtyStart": 1
         }
       }
     },
