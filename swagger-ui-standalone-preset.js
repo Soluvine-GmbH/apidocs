@@ -16400,7 +16400,7 @@
                             l.push(o.createElement("label", {
                                     className: "select-label",
                                     htmlFor: "select"
-                                }, o.createElement("span", null, "Select a definition"), o.createElement("select", {
+                                }, o.createElement("span", null, "Select a version"), o.createElement("select", {
                                         id: "select",
                                         disabled: u,
                                         onChange: this.onUrlSelect,

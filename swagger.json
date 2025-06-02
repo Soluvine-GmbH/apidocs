@@ -1011,6 +1011,106 @@
         }
       }
     },
+    "/FXLInboundServices_WMS/FXLInventJournalService/movement": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers inventory movement journal",
+        "description": "⚠️ This API is currently under active development. Changes are expected. Do not use in production.",
+        "operationId": "movement",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register a movement journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/MovementJournal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },    
+    "/FXLInboundServices_WMS/FXLInventJournalService/lossProfit": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers adjustment movement journal",
+        "description": "⚠️ This API is currently under active development. Changes are expected. Do not use in production.",
+        "operationId": "adjustment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register an adjustment journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/AdjustmentJournal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },     
     "/FXLInboundServices/FXLIntegrationStatusLogService/getStatus": {
       "post": {
         "tags": [
@@ -3009,6 +3109,286 @@
         }
       }
     },
+    "AdjustmentJournal": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/AdjustmentJournalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdjustmentJournalLines"
+          }
+        }
+      }
+    },
+    "AdjustmentJournalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },
+        "postJournal": {
+          "type": "string",
+           "enum": [
+                "Yes",
+                "No"
+             ]
+        }
+      }
+    },   
+    "AdjustmentJournalLines": {
+      "type": "object",
+      "properties": {
+        "costMarkup": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "costPrice": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        },  
+        "externalRef": {
+          "type": "string"
+        },  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },                         	
+       "inventTransIdReturn": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "unitQty": {
+          "type": "number"
+        }          
+      }
+    },           
+    "MovementJournal": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/MovementJournalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MovementJournalLines"
+          }
+        }
+      }
+    },
+    "MovementJournalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },
+        "postJournal": {
+          "type": "string",
+           "enum": [
+                "Yes",
+                "No"
+             ]
+        }
+      }
+    },   
+    "MovementJournalLines": {
+      "type": "object",
+      "properties": {
+        "costMarkup": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "costPrice": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        },  
+        "externalRef": {
+          "type": "string"
+        },  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },                         	
+       "inventTransIdReturn": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "unitQty": {
+          "type": "number"
+        }          
+      }
+    },     
     "Line": {
       "type": "object",
       "properties": {
