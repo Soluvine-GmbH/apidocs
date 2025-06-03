@@ -2769,12 +2769,18 @@
         },
         "packingSlipId": {
           "type": "string"
-        }
+        },
+        "externalRef": {
+          "type": "string"
+        }        
       }
     },
     "PickingListRegistrationLines": {
       "type": "object",
       "properties": {
+        "externalRef": {
+          "type": "string"
+        },      
         "itemId": {
           "type": "string"
         },
