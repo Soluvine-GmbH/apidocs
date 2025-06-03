@@ -2764,19 +2764,7 @@
     "PickingListRegistrationHeader": {
       "type": "object",
       "properties": {
-        "description": {
-          "type": "string"
-        },
-        "inventTransRefId": {
-          "type": "string"
-        },
-        "inventTransType": {
-          "type": "string"
-        },
         "journalId": {
-          "type": "string"
-        },
-        "journalNameId": {
           "type": "string"
         },
         "packingSlipId": {
