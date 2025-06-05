@@ -58,8 +58,9 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Upload a sales order.",
-        "description": "",
+        "summary": "Upload a sales order. Last updated: 2025-06-04",
+        "x-last-updated": "2025-06-04",
+        "description": "<b>Last updated: 2025-06-04</b>",
         "operationId": "createSalesTable",
         "consumes": [
           "application/json"
@@ -859,7 +860,7 @@
           "Warehouse interfaces"
         ],
         "summary": "Registers inventory movement journal",
-        "description": "⚠️ This API is currently under active development. Changes are expected. Do not use in production.",
+        "description": "",
         "operationId": "movement",
         "consumes": [
           "application/json"
@@ -909,7 +910,7 @@
           "Warehouse interfaces"
         ],
         "summary": "Registers adjustment movement journal",
-        "description": "⚠️ This API is currently under active development. Changes are expected. Do not use in production.",
+        "description": "",
         "operationId": "adjustment",
         "consumes": [
           "application/json"
@@ -2647,7 +2648,9 @@
       "properties": {
         "inventBatchExpDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "default": "1900-01-01T00:00:00Z",
+          "description": "<b>IMPORTANT: If the field is used, it has to contain a date-time value.<br /> If no value is required, the field must not be used or the default value must be used.</b> "
         },
         "inventBatchId": {
           "type": "string"
@@ -2797,7 +2800,8 @@
           "format": "date-time"
         },
         "inventTransId": {
-          "type": "string"
+          "type": "string",
+          "description": "Lot id"
         },
         "inventDim": {
         	"type": "object",
@@ -2878,20 +2882,24 @@
           "type": "string"
         },
         "externalRef": {
-          "type": "string"
+          "type": "string",
+          "description": "External reference as assigned by the sender. This value is not posted into D365 journal."
         },
         "journalId": {
-          "type": "string"
+          "type": "string",
+          "description": "Number of the Movement journal in D365 & SCM. If not provided a new number will be used according to the number sequence."
         },
         "journalNameId": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the Movement journal in D365 & SCM."
         },
         "postJournal": {
           "type": "string",
            "enum": [
                 "Yes",
                 "No"
-             ]
+             ],
+           "description": "Possible values: </br>Yes - Post the journal in D365 & SCM when the posted in FlexxLink. </br>No - Does not post the journal in D365 & SCM when posted in FlexxLink. Journal has to be posted outside FlexxLink."  
         }
       }
     },   
@@ -2901,15 +2909,16 @@
         "costMarkup": {
           "type": "number",
           "multipleOf": 0.01,
-          "description": "Precision of two digits."
+          "description": "Precision of two digits.</br>Charges on cost. "
         }, 
         "costPrice": {
           "type": "number",
           "multipleOf": 0.01,
-          "description": "Precision of two digits."
+          "description": "Precision of two digits.</br>Specifies the cost per unit to refer to inventory receipts."
         },  
         "externalRef": {
-          "type": "string"
+          "type": "string",
+          "description": "External reference as assigned by the sender. This value is not posted into D365 journal."
         },  
         "inventDim": {
           "type": "object",
@@ -2969,7 +2978,8 @@
           }
         },                         	
        "inventTransIdReturn": {
-          "type": "string"
+          "type": "string",
+          "description": "Return lot Id. Used for returned goods. Value from the original Sales line."
         },
         "itemId": {
           "type": "string"
@@ -2984,7 +2994,8 @@
         },
         "transDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The date of the inventory transfer."
         },
         "unit": {
           "type": "string"
@@ -3109,7 +3120,8 @@
           }
         },                         	
        "inventTransIdReturn": {
-          "type": "string"
+          "type": "string",
+          "description": "Return lot id"
         },
         "itemId": {
           "type": "string"
