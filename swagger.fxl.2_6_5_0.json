@@ -2652,15 +2652,6 @@
           "default": "1900-01-01T00:00:00Z",
           "description": "<b>IMPORTANT: If the field is used, it has to contain a date-time value.<br /> If no value is required, the field must not be used or the default value must be used.</b> "
         },
-        "inventBatchId": {
-          "type": "string"
-        },
-        "inventLocationId": {
-          "type": "string"
-        },
-        "inventSiteId": {
-          "type": "string"
-        },
         "inventTransId": {
           "type": "string"
         },
