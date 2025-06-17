@@ -2564,7 +2564,15 @@
       }
     },
     "ItemArrivalCreate": {
+    "type": "object",
+    "properties": {
+    "_contract": {
       "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
       "properties": {
         "message": {
           "$ref": "#/definitions/Message"
@@ -2579,6 +2587,8 @@
           }
         }
       }
+    }
+    }
     },
     "ItemArrivalHeader": {
       "type": "object",
@@ -2740,6 +2750,14 @@
     },
     "PickingListRegistration": {
       "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
       "properties": {
         "message": {
           "$ref": "#/definitions/Message"
@@ -2754,6 +2772,8 @@
           }
         }
       }
+    }
+    }
     },
     "PickingListRegistrationHeader": {
       "type": "object",
@@ -2857,7 +2877,15 @@
       }
     },
     "AdjustmentJournal": {
+            "type": "object",
+    "properties": {
+    "_contract": {
       "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
       "properties": {
         "message": {
           "$ref": "#/definitions/Message"
@@ -2872,6 +2900,8 @@
           }
         }
       }
+    }
+    }
     },
     "AdjustmentJournalHeader": {
       "type": "object",
@@ -3005,6 +3035,14 @@
     },           
     "MovementJournal": {
       "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
       "properties": {
         "message": {
           "$ref": "#/definitions/Message"
@@ -3019,6 +3057,8 @@
           }
         }
       }
+    }
+    }
     },
     "MovementJournalHeader": {
       "type": "object",
