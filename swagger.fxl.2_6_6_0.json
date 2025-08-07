@@ -1338,6 +1338,10 @@
             "header": {
               "type": "object",
               "properties": {
+                "externalRef": {
+                  "type": "string",
+                  "description": "External reference."
+                },
                 "prodId": {
                   "type": "string",
                   "description": "The value from the header will be used (1) on the line in case no value is given on the line, (2) for Production journals header Production Id value."
@@ -1366,6 +1370,46 @@
         "transDate"
       ],
       "properties": {
+        "bomScrap": {
+              "type": "number",
+              "description": "Amount of scrap for Bill of Materials."
+            },
+        "bomUnitId": {
+              "type": "string",
+              "description": "Unit identification of the amount of scrap for Bill of Materials."
+            },  
+        "defaultDimensionDisplayValue": {
+              "type": "string",
+              "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+            },  
+         "endConsump": {
+              "type": "enum",
+              "description": "End of consumption checkmark (1 - Yes, 0 - No).",
+            "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+            }, 
+        "errorCause": {
+          "type": "string",
+          "description": "Cause of error.<br /> Use enum value: <br /> 0 - None (no value will be displayed) <br /> 1 - Material <br /> 2 - Machine <br /> 3 - Operator",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        },  
+        "externalRef": {
+                  "type": "string",
+                  "description": "External reference."
+                }, 
+        "inventConsump": {
+              "type": "number",
+              "description": "Amount of material consumed during production."
+            },                                                                  
         "inventDim": {
           "type": "object",
           "properties": {
@@ -1419,6 +1463,20 @@
             }
           }
         },
+        "inventProposal": {
+              "type": "number",
+              "description": "Suggested amount to be picked."
+            },  
+         "inventReturnFlag": {
+              "type": "enum",
+              "description": "End reporting Return flag (1 - Yes, 0 - No).",
+            "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+            },             
         "inventTransId": {
           "type": "string",
           "description": "LotId in Dynamics 365"
@@ -1426,6 +1484,10 @@
         "itemId": {
           "type": "string"
         },
+        "position": {
+          "type": "string",
+          "description": "BOM position reference."
+        },        
         "prodId": {
           "type": "string"
         },
