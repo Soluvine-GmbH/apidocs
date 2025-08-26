@@ -2457,9 +2457,6 @@
             "message": {
               "$ref": "#/definitions/Message"
             },
-            "inventLocationId": {
-              "type": "string"
-            },
             "itemId": {
               "type": "string"
             },
@@ -2563,9 +2560,6 @@
             "timestampFinished"
           ],
           "properties": {
-            "inventLocationId": {
-              "type": "string"
-            },
             "itemId": {
               "type": "string"
             },
