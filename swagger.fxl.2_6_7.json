@@ -915,7 +915,7 @@
     "/FXLInboundServices_Prod/FXLProdTableV2Service/statusDecrease": {
       "post": {
         "tags": [
-          "Production interfaces"
+          "Production interfaces V2"
         ],
         "summary": "Reports status change of a production order.",
         "description": "",
