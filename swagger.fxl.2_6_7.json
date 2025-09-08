@@ -2920,27 +2920,26 @@
             "prodId": {
               "type": "string"
             },
+            "lines": {
+              "type": "array",
+              "description": "Items to start.",
+              "items": {
+              "$ref": "#/definitions/ProductionStartLineV2"
+              }
+            }
+          }
+        }
+      }
+    },  
+    "ProductionStartLineV2": {
+      "type": "object",
+      "properties": {
             "qtyStart": {
               "type": "integer",
               "format": "int32"
             }
           }
-        }
-      },
-      "example": {
-        "_contract": {
-          "message": {
-            "applicationId": "ProdSystem",
-            "companyId": "usmf",
-            "description": "Production start message",
-            "messageId": "abcd-1234-efgh-5678",
-            "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
-          },
-          "prodId": "usmf-000027349",
-          "qtyStart": 1
-        }
-      }
-    },    
+    },  
     "ProductionFinishedV2Line": {
     	"type": "object",
     	"properties": {
