@@ -3900,7 +3900,7 @@
       "example": {
         "$id": "1",
         "status": "200",
-        "message": "Importierte Bestelldaten",
+        "message": "Message imported.",
         "jobId": "2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770",
         "jobStatus": "13",
         "JobMessage": "Job '2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770' has been processed succesfully."
