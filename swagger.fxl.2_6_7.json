@@ -817,7 +817,7 @@
         "tags": [
           "Production interfaces V2"
         ],
-        "summary": "Reports produced quantities of a production order and ends it.",
+        "summary": "Reports produced quantities of a production order.",
         "description": "",
         "operationId": "reportAsFinishedProgressV2",
         "consumes": [
@@ -830,7 +830,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Reports produced quantities of a production order and ends it.",
+            "description": "Reports produced quantities of a production order.",
             "schema": {
               "$ref": "#/definitions/ProductionProgressV2"
             },
