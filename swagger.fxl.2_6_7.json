@@ -1291,6 +1291,21 @@
               "type": "string",
               "description": "Number of the production order."
             },
+            "lines":{
+              "type": "array",
+              "description": "Items to change the status.",
+              "items": {
+              "$ref": "#/definitions/StatusDecreaseLineV2"
+            }
+          }
+        }
+      }
+      }
+    },   
+    
+    "StatusDecreaseLineV2": {
+      "type": "object",
+      "properties": {
             "prodStatus": {
               "type": "string",
               "description": "Status of a production order that should be set. See enum for possible values.",
@@ -1305,12 +1320,16 @@
               ]
             },
             "reverseDerivedProd": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "The order and all operations that are associated with the routes revert to a previous step in the production life cycle."
+            },
+            "externalRef": {
+              "type": "string",
+              "description": "External reference."
             }
           }
-        }
-      }
-    },    
+    },  
+         
     "JobCard": {
       "type": "object",
       "properties": {
@@ -2937,20 +2956,43 @@
             "qtyStart": {
               "type": "integer",
               "format": "int32"
-            }
+            },
+            "externalRef": {
+              "type": "string"
+            }                   
           }
     },  
     "ProductionFinishedV2Line": {
     	"type": "object",
     	"properties": {
+    	"itemId": {
+              "type": "string",
+              "description": "Item number."
+            },
+               	  "processingTime": {
+              "type": "integer",
+              "description": "Processing time."
+            },             
+         "qtyError": {
+              "type": "number",
+              "description": "Precision of two digits."
+            }, 
+                     "errorCause": {
+              "type": "string",
+              "description": "Cause of error."
+            },   
     	"qtyGood": {
               "type": "number",
               "description": "Precision of two digits."
             },
             "resource": {
               "type": "string",
-              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job"
+              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job."
             },
+            "externalRef": {
+              "type": "string",
+              "description": "External reference."
+            },            
             "timestampFinished": {
               "type": "string",
               "format": "date-time"
@@ -3049,6 +3091,22 @@
     "ProductionProgressV2Line": {
     	"type": "object",
     	"properties": {
+    	  "itemId": {
+              "type": "string",
+              "description": "Item number."
+            },
+               	  "processingTime": {
+              "type": "integer",
+              "description": "Processing time."
+            }, 
+         "qtyError": {
+              "type": "number",
+              "description": "Precision of two digits."
+            }, 
+                     "errorCause": {
+              "type": "string",
+              "description": "Cause of error."
+            },             
     	"qtyGood": {
               "type": "number",
               "description": "Precision of two digits."
@@ -3057,6 +3115,10 @@
               "type": "string",
               "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job"
             },
+            "externalRef": {
+              "type": "string",
+              "description": "External reference."
+            },              
             "timestampFinished": {
               "type": "string",
               "format": "date-time"
