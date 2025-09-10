@@ -3001,6 +3001,9 @@
               "type": "string",
               "format": "date-time"
             },
+            "jobId": {
+           "type": "string"
+        },
             "inventDim": {
               "type": "object",
               "properties": {
@@ -3052,10 +3055,7 @@
                   "type": "string",
                   "description": "Storage dimension: Location"
                 }
-    	},       
-    	"jobId": {
-           "type": "string"
-        }
+    	}
     }
          }
     },
@@ -3074,14 +3074,19 @@
             "prodId": {
               "type": "string"
             },
+            
+
             "lines": {
               "type": "array",
               "description": "List of Production orders.",
               "items": {
                 "$ref": "#/definitions/ProductionFinishedV2Line"
               }
-            }
-            
+            },
+
+               	"jobId": {
+           "type": "string"
+        }
              }
             }
 
@@ -3127,6 +3132,9 @@
               "type": "string",
               "format": "date-time"
             },
+             "jobId": {
+           "type": "string"
+        },
             "inventDim": {
               "type": "object",
               "properties": {
@@ -3178,12 +3186,11 @@
                   "type": "string",
                   "description": "Storage dimension: Location"
                 }
-    	},       
-    	"jobId": {
-           "type": "string"
-        }
+    	}
     }
+
          }
+
     },
     "ProductionProgressV2": {
       "type": "object",
@@ -3204,7 +3211,7 @@
               "type": "array",
               "description": "List of Production orders.",
               "items": {
-                "$ref": "#/definitions/ProductionFinishedV2Line"
+                "$ref": "#/definitions/ProductionProgressV2Line"
               }
             }
             
