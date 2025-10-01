@@ -2414,7 +2414,18 @@
         },
         "port": {
           "type": "string"
-        }
+        },
+        "purchPrice": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchQty": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchUnit": {
+          "type": "string"
+        }        
       }
     },
     "PurchaseConfirmLine": {
