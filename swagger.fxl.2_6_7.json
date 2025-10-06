@@ -362,6 +362,57 @@
         }
       }
     },
+    "/FXLInboundServices_B2B/FXLPurchDespatchAdviceService/despatchAdvice": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Import Despatch advice information. Last updated: 2025-10-06",
+        "x-last-updated": "2025-10-06",
+        "description": "<b>Last updated: 2025-10-06</b>",
+        "operationId": "despatchAdvice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Import Despatch advice information.",
+            "schema": {
+              "$ref": "#/definitions/DespatchAdvice"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
     "/BVBSFileImportServiceGroup/FXLBVBSImportFileService/importBVBSFile": {
       "post": {
         "tags": [
@@ -2342,9 +2393,6 @@
         "invoiceAccount": {
           "type": "string"
         },
-        "message": {
-          "type": "string"
-        },
         "notes": {
           "type": "string"
         },
@@ -2380,17 +2428,17 @@
         "externalItemId": {
           "type": "string"
         },
-        "fxlImportId": {
-          "type": "string"
-        },
         "globalTradeItemNumber": {
-          "type": "string"
+          "type": "string",
+          "description": "Used if item identification is set to GTIN number."
         },
         "intrastatCommodity": {
-          "type": "string"
+          "type": "string",
+          "description": "Commodity code of the item."
         },
         "itemBarCode": {
-          "type": "string"
+          "type": "string",
+          "description": "Used if item identification is set to Barcode."
         },
         "itemId": {
           "type": "string"
@@ -2403,9 +2451,6 @@
           "type": "number",
           "description": "Precision of two digits"
         },
-        "message": {
-          "type": "string"
-        },
         "notes": {
           "type": "string"
         },
@@ -2413,7 +2458,8 @@
           "type": "string"
         },
         "port": {
-          "type": "string"
+          "type": "string",
+          "description": "Port where the current load is ordered. Used for intrastat reporting."
         },
         "purchPrice": {
           "type": "number",
@@ -2425,6 +2471,9 @@
         },
         "purchUnit": {
           "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
         }        
       }
     },
@@ -2510,9 +2559,6 @@
         "externalItemId": {
           "type": "string"
         },
-        "fxlImportId": {
-          "type": "string"
-        },
         "globalTradeItemNumber": {
           "type": "string"
         },
@@ -2533,9 +2579,6 @@
           "type": "number",
           "description": "Precision of two digits"
         },
-        "message": {
-          "type": "string"
-        },
         "notes": {
           "type": "string"
         },
@@ -2544,7 +2587,21 @@
         },
         "port": {
           "type": "string"
-        }
+        },
+        "purchPrice": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchQty": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchUnit": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        }                
       }
     },
     "CollectionLines": {
@@ -2577,6 +2634,82 @@
         }
       }
     },
+    "DespatchAdvice": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/DespatchAdviceHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DespatchAdviceLine"
+              }
+            }
+          }
+        }
+      }
+    },
+    "DespatchAdviceHeader": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "notificationid": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        }
+      }
+    },     
+    "DespatchAdviceLine": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer"
+        },
+        "orderId": {
+          "type": "string"
+        },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DespatchAdvicePackage"
+              }
+            },        
+        "qty": {
+          "type": "integer"
+        }       
+      }
+    },      
+    "DespatchAdvicePackage": {
+      "type": "object",
+      "properties": {
+        "packageId0": {
+          "type": "string"
+        },
+        "packageId1": {
+          "type": "string"
+        },      
+        "qty": {
+          "type": "integer"
+        }       
+      }
+    },     
     "BvbsImport": {
       "type": "object",
       "properties": {
