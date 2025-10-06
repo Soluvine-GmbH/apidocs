@@ -2676,6 +2676,9 @@
     "DespatchAdviceLine": {
       "type": "object",
       "properties": {
+              "externalItemId": {
+          "type": "string"
+        },
         "itemId": {
           "type": "string"
         },
@@ -2685,7 +2688,7 @@
         "orderId": {
           "type": "string"
         },
-            "lines": {
+            "packages": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DespatchAdvicePackage"
