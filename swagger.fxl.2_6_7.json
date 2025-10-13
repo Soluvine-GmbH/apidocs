@@ -2860,9 +2860,7 @@
           "required": [
             "prodId",
             "qtyError",
-            "qtyGood",
-            "timestampStarted",
-            "timestampFinished"
+            "qtyGood"
           ],
           "properties": {
             "message": {
@@ -2966,9 +2964,7 @@
           "required": [
             "prodId",
             "qtyError",
-            "qtyGood",
-            "timestampStarted",
-            "timestampFinished"
+            "qtyGood"
           ],
           "properties": {
             "itemId": {
