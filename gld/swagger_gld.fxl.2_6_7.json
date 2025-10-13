@@ -713,6 +713,50 @@
         }
       }
     },
+    "/GLDFXLInboundServices_Prod/GLDFXLProdJournalService/pickingList": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Creates a picking list for production orders material consumption.",
+        "description": "",
+        "operationId": "GLDpickingList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates a picking list for production orders material consumption.",
+            "schema": {
+              "$ref": "#/definitions/GLDPickingList"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },    
     "/FXLInboundServices_Prod/FXLProdJournalService/routeCard": {
       "post": {
         "tags": [
@@ -1691,7 +1735,7 @@
             },
         "bomUnitId": {
               "type": "string",
-              "description": "Unit identification."
+              "description": "Unit identification of the amount of scrap for Bill of Materials."
             },  
         "defaultDimensionDisplayValue": {
               "type": "string",
@@ -1823,6 +1867,351 @@
         }
       }
     },
+    "GLDPickingList": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "header"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "type": "object",
+              "required": [
+                "transDate"
+              ],
+              "properties": {
+                              "externalRef": {
+                  "type": "string",
+                  "description": "External reference."
+                },
+                "prodId": {
+                  "type": "string"
+                },
+
+                "wrkCtrId": {
+                  "type": "string"
+                }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GLDPickingListLines"
+              }
+            },
+            "mbbOrderLines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MBBOrderLines"
+              }
+            },
+            "remainParts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RemainParts"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GLDPickingListLines": {
+      "type": "object",
+      "required": [
+        "itemId",
+        "oprNum",
+        "prodId",
+        "qty",
+        "transDate"
+      ],
+      "properties": {
+        "bomScrap": {
+              "type": "number",
+              "description": "Amount of scrap for Bill of Materials."
+            },
+        "bomUnitId": {
+              "type": "string",
+              "description": "Unit identification."
+            },  
+        "defaultDimensionDisplayValue": {
+              "type": "string",
+              "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+            },  
+         "endConsump": {
+              "type": "enum",
+              "description": "End of consumption checkmark (1 - Yes, 0 - No).",
+            "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+            }, 
+                    "errorCause": {
+          "type": "string",
+          "description": "Cause of error.<br /> Use enum value: <br /> 0 - None (no value will be displayed) <br /> 1 - Material <br /> 2 - Machine <br /> 3 - Operator",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        },  
+        "externalRef": {
+                  "type": "string",
+                  "description": "External reference."
+                }, 
+        "inventConsump": {
+              "type": "number",
+              "description": "Amount of material consumed during production."
+            },                                                                  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string"
+            },
+            "colorId": {
+              "type": "string"
+            },
+            "configId": {
+              "type": "string"
+            },
+            "inventDimId": {
+              "type": "string"
+            },
+            "licensePlateId": {
+              "type": "string"
+            },
+            "locationId": {
+              "type": "string"
+            },
+            "palletId": {
+              "type": "string"
+            },
+            "serialId": {
+              "type": "string"
+            },
+            "siteId": {
+              "type": "string"
+            },
+            "sizeId": {
+              "type": "string"
+            },
+            "styleId": {
+              "type": "string"
+            },
+            "wmsLocationId": {
+              "type": "string"
+            }
+          }
+        },
+        "inventProposal": {
+              "type": "number",
+              "description": "Suggested amount to be picked."
+            },  
+         "inventReturnFlag": {
+              "type": "enum",
+              "description": "End reporting Return flag (1 - Yes, 0 - No).",
+            "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+            },             
+        "inventTransId": {
+          "type": "string",
+          "description": "LotId in Dynamics 365"
+        },        
+        "itemId": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string",
+          "description": "BOM position reference."
+        },          
+        "prodId": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "number"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "wrkCtrId": {
+          "type": "string",
+          "description": "Resource id in D365 F&O. If Site, Warehouse and Location are empty, then input location from wrkCtrId is used."
+        },
+        "oprNum": {
+          "type": "integer",
+          "description": "Defines where the operation occurs in the sequence of operations for the production."
+        }
+      }
+    },
+    
+    "MBBOrderLines": {
+      "type": "object",
+      "properties": {
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string"
+            },
+            "colorId": {
+              "type": "string"
+            },
+            "configId": {
+              "type": "string"
+            },
+            "inventDimId": {
+              "type": "string"
+            },
+            "licensePlateId": {
+              "type": "string"
+            },
+            "locationId": {
+              "type": "string"
+            },
+            "palletId": {
+              "type": "string"
+            },
+            "serialId": {
+              "type": "string"
+            },
+            "siteId": {
+              "type": "string"
+            },
+            "sizeId": {
+              "type": "string"
+            },
+            "styleId": {
+              "type": "string"
+            },
+            "wmsLocationId": {
+              "type": "string"
+            }
+          }
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "reductionQty": {
+          "type": "number"
+        }
+      }
+    },
+    "RemainParts": {
+      "type": "object",
+      "properties": {
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string"
+            },
+            "colorId": {
+              "type": "string"
+            },
+            "configId": {
+              "type": "string"
+            },
+            "inventDimId": {
+              "type": "string"
+            },
+            "licensePlateId": {
+              "type": "string"
+            },
+            "locationId": {
+              "type": "string"
+            },
+            "palletId": {
+              "type": "string"
+            },
+            "serialId": {
+              "type": "string"
+            },
+            "siteId": {
+              "type": "string"
+            },
+            "sizeId": {
+              "type": "string"
+            },
+            "styleId": {
+              "type": "string"
+            },
+            "wmsLocationId": {
+              "type": "string"
+            }
+          }
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "number"
+        },
+        "remainPartInventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string"
+            },
+            "colorId": {
+              "type": "string"
+            },
+            "configId": {
+              "type": "string"
+            },
+            "inventDimId": {
+              "type": "string"
+            },
+            "licensePlateId": {
+              "type": "string"
+            },
+            "locationId": {
+              "type": "string"
+            },
+            "palletId": {
+              "type": "string"
+            },
+            "serialId": {
+              "type": "string"
+            },
+            "siteId": {
+              "type": "string"
+            },
+            "sizeId": {
+              "type": "string"
+            },
+            "styleId": {
+              "type": "string"
+            },
+            "wmsLocationId": {
+              "type": "string"
+            }
+          }
+        },
+        "remainPartQty": {
+          "type": "number"
+        },
+        "wrkCtrId": {
+          "type": "string"
+        }
+      }
+    },    
     "ConfirmCollection": {
       "type": "object",
       "properties": {
