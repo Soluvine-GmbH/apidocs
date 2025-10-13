@@ -1925,8 +1925,6 @@
       "type": "object",
       "required": [
         "itemId",
-        "oprNum",
-        "prodId",
         "qty",
         "transDate"
       ],
@@ -1937,7 +1935,7 @@
             },
         "bomUnitId": {
               "type": "string",
-              "description": "Unit identification."
+              "description": "Unit identification. <br /> Mandatory if no inventTransId provided."
             },  
         "defaultDimensionDisplayValue": {
               "type": "string",
@@ -2116,7 +2114,7 @@
     "RemainParts": {
       "type": "object",
       "properties": {
-        "inventDim": {
+        "inventDimFrom": {
           "type": "object",
           "properties": {
             "batchId": {
@@ -2160,10 +2158,10 @@
         "itemId": {
           "type": "string"
         },
-        "qty": {
+        "qtyFrom": {
           "type": "number"
         },
-        "remainPartInventDim": {
+        "inventDimTo": {
           "type": "object",
           "properties": {
             "batchId": {
@@ -2204,7 +2202,7 @@
             }
           }
         },
-        "remainPartQty": {
+        "qtyTo": {
           "type": "number"
         },
         "wrkCtrId": {

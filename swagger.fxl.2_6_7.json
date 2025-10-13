@@ -1691,7 +1691,7 @@
             },
         "bomUnitId": {
               "type": "string",
-              "description": "Unit identification."
+              "description": "Unit identification. <br /> Mandatory if no inventTransId provided."
             },  
         "defaultDimensionDisplayValue": {
               "type": "string",
