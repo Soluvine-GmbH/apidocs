@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "This is documentation for FlexxWare API from Soluvine GmbH.  You can find out more about Soluvine solutions at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  </br> The FlexxWare API is using REST API to define its endpoints. This page also provides sample Authorization information and sample responses to each API endpoint.",
-    "version": "2.6.7.0",
+    "version": "2.6.7.0 - 2.6.8.0",
     "title": "FlexxWare for Dynamics 365 Finance and Operations",
     "termsOfService": "https://soluvine.com/",
     "contact": {
