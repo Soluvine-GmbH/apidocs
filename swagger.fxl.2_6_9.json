@@ -1221,7 +1221,7 @@
         ],
         "summary": "Registers an item counting journal",
         "description": "",
-        "operationId": "adjustment",
+        "operationId": "counting",
         "consumes": [
           "application/json"
         ],
