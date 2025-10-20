@@ -1213,7 +1213,57 @@
           }
         }
       }
-    },         
+    },   
+    "/FXLInboundServices_WMS/FXLInventJournalService/count": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers inventory adjustment journal",
+        "description": "",
+        "operationId": "adjustment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register an item counting journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/CountingJournal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },            
     "/FXLInboundServices/FXLIntegrationStatusLogService/getStatus": {
       "post": {
         "tags": [
@@ -4041,10 +4091,7 @@
         },
         "offsetAccount": {
           "type": "string"
-        }, 
-        "priceUnitQty": {
-          "type": "number"
-        },                   
+        },                 
         "qty": {
           "type": "integer",
           "format": "int32"
@@ -4060,7 +4107,183 @@
           "type": "number"
         }          
       }
-    },         
+    },   
+    
+    "CountingJournal": {
+      "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/CountingJournalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CountingJournalLines"
+          }
+        }
+      }
+    }
+    }
+    },  
+    
+    "CountingJournalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "inventLocationId": {
+          "type": "string"
+        },   
+        "inventSiteId": {
+          "type": "string"
+        },                  
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },      
+        "postJournal": {
+          "type": "string",
+           "enum": [
+                "Yes",
+                "No"
+             ]
+        },
+        "worker": {
+          "type": "string",
+          "description": "Id of a worker."
+        }
+      }
+    },   
+    "CountingJournalLines": {
+      "type": "object",
+      "properties": {
+        "costMarkup": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "costPrice": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "counted": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "countingReasonCode": {
+          "type": "string"
+        },                 
+        "defaultDimensionDisplayValue": {
+          "type": "string",
+          "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+        },         
+        "externalRef": {
+          "type": "string"
+        },  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },                         	
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },                 
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "unitQty": {
+          "type": "number"
+        },
+        "worker": {
+          "type": "string",
+          "description": "Id of a worker."
+        }                  
+      }
+    },   
+              
     "Line": {
       "type": "object",
       "properties": {
