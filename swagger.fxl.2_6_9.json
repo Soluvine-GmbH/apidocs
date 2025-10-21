@@ -3533,11 +3533,12 @@
           "type": "string"
         },
         "inventTransRefId": {
-          "type": "string"
+          "type": "string",
+          "description": "If not known skip this field and use orderAccount and purchOrderFormNum (customer requisition) to identify reference for posting."
         },
         "inventTransType": {
           "type": "string",
-          "description": "Use Purch as value"
+          "description": "Use Purch as value for Purchase order reference. Use Sales for Sales order reference."
         },
         "journalId": {
           "type": "string"
@@ -4396,17 +4397,7 @@
     },   
     "TransferJournalLines": {
       "type": "object",
-      "properties": {
-        "costMarkup": {
-          "type": "number",
-          "multipleOf": 0.01,
-          "description": "Precision of two digits."
-        }, 
-        "costPrice": {
-          "type": "number",
-          "multipleOf": 0.01,
-          "description": "Precision of two digits."
-        },                
+      "properties": {               
         "defaultDimensionDisplayValue": {
           "type": "string",
           "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
