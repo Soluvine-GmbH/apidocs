@@ -66,9 +66,9 @@
         "tags": [
           "EDI and B2B interfaces"
         ],
-        "summary": "Upload a sales order. Last updated: 2025-06-04",
-        "x-last-updated": "2025-06-04",
-        "description": "<b>Last updated: 2025-06-04</b>",
+        "summary": "Upload a sales order. Last updated: 2025-10-23",
+        "x-last-updated": "2025-10-23",
+        "description": "<b>Last updated: 2025-10-23</b>",
         "operationId": "createSalesTable",
         "consumes": [
           "application/json"
@@ -1396,7 +1396,8 @@
         "_contract": {
           "type": "object",
           "required": [
-            "message"
+            "message",
+            "prodId"
           ],
           "properties": {
             "message": {
@@ -1507,6 +1508,9 @@
                 "wrkCtrId": {
                   "type": "string",
                   "description": "The value from the header will be used on the line in case no value is given on the line."
+                },
+                "externalRef": {
+                  "type": "string"
                 }
               }
             },
@@ -1557,59 +1561,6 @@
         "wrkCtrId": {
           "type": "string",
           "description": "Resource id in D365 F&O. If not provided, it is retrieved using jobId."
-        },
-        "inventDim": {
-          "type": "object",
-          "properties": {
-            "batchId": {
-              "type": "string",
-              "description": "Tracking dimension: Batch number"
-            },
-            "colorId": {
-              "type": "string",
-              "description": "Product dimension: Color"
-            },
-            "configId": {
-              "type": "string",
-              "description": "Product dimension: Configuration"
-            },
-            "licensePlateId": {
-              "type": "string",
-              "description": "Storage dimension: License plate"
-            },
-            "locationId": {
-              "type": "string",
-              "description": "Storage dimension: Warehouse"
-            },
-            "ownerId": {
-              "type": "string",
-              "description": "Tracking dimension: Owner"
-            },
-            "serialId": {
-              "type": "string",
-              "description": "Tracking dimension: Serial number"
-            },
-            "siteId": {
-              "type": "string",
-              "description": "Storage dimension: Site"
-            },
-            "sizeId": {
-              "type": "string",
-              "description": "Storage dimension: Size"
-            },
-            "statusId": {
-              "type": "string",
-              "description": "Storage dimension: Inventory status"
-            },
-            "styleId": {
-              "type": "string",
-              "description": "Product dimension: Style"
-            },
-            "wmsLocationId": {
-              "type": "string",
-              "description": "Storage dimension: Location"
-            }
-          }
         }
       }
     },
@@ -1620,7 +1571,8 @@
           "type": "object",
           "required": [
             "message",
-            "header"
+            "header",
+            "lines"
           ],
           "properties": {
             "message": {
@@ -1656,8 +1608,6 @@
     "RouteCardLines": {
       "type": "object",
       "required": [
-        "oprNum",
-        "qtyGood",
         "transDate"
       ],
       "properties": {
@@ -1690,7 +1640,11 @@
         "jobType": {
        		"type": "string",
             "description": "Task type."
-         },           
+         }, 
+        "oprId": {
+       		"type": "string",
+            "description": "Operation identification."
+         },                    
         "oprFinished": {
           "type": "boolean",
           "description": "If true, sets operation to completed."
@@ -1744,7 +1698,8 @@
           "type": "object",
           "required": [
             "message",
-            "header"
+            "header",
+            "lines"
           ],
           "properties": {
             "message": {
@@ -1781,7 +1736,6 @@
       "type": "object",
       "required": [
         "itemId",
-        "qty",
         "transDate"
       ],
       "properties": {
@@ -1977,12 +1931,12 @@
               "$ref": "#/definitions/Message"
             },
             "header": {
-              "$ref": "#/definitions/Header"
+              "$ref": "#/definitions/SalesOrderUpdateHeader"
             },
             "lines": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Line"
+                "$ref": "#/definitions/SalesOrderUpdateLine"
               }
             }
           }
@@ -2095,9 +2049,7 @@
       "type": "object",
       "required": [
         "applicationId",
-        "companyId",
-        "messageId",
-        "messageTimeStamp"
+        "companyId"
       ],
       "properties": {
         "applicationId": {
@@ -2143,6 +2095,9 @@
         "gLNCode": {
           "type": "string"
         },
+        "invoiceAccount": {
+          "type": "string"
+        },        
         "deliveryName": {
           "type": "string"
         },
@@ -2167,6 +2122,102 @@
         "dlvTerm": {
           "type": "string"
         },
+        "salesPoolId": {
+          "type": "string"
+        },        
+        "salesType": {
+          "type": "string",
+                      "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fXLWorkerSalesTaker": {
+          "type": "string"
+        },        
+        "notes": {
+          "type": "string"
+        },
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesOrderUpdateHeader": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "contactPersonName": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "deliveryAddress": {
+          "type": "string",
+          "format": "deprecated"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },        
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },
+        "dlvMode": {
+          "type": "string"
+        },
+        "dlvTerm": {
+          "type": "string"
+        },
+        "salesPoolId": {
+          "type": "string"
+        },        
         "salesType": {
           "type": "string"
         },
@@ -2179,6 +2230,9 @@
         "phone": {
           "type": "string"
         },
+        "fXLWorkerSalesTaker": {
+          "type": "string"
+        },        
         "notes": {
           "type": "string"
         },
@@ -2190,9 +2244,15 @@
         },
         "shippingDateRequested": {
           "type": "string"
-        }
+        },
+        "url": {
+          "type": "string"
+        },    
+        "updateAction": {
+          "type": "string"
+        }  
       }
-    },
+    },    
     "CollectionHeader": {
       "type": "object",
       "properties": {
@@ -2205,17 +2265,11 @@
         "custAccount": {
           "type": "string"
         },
-        "fXLImportId": {
-          "type": "string"
-        },
         "gLNCode": {
           "type": "string"
         },
         "isCredit": {
           "type": "number"
-        },
-        "message": {
-          "type": "string"
         },
         "paymMode": {
           "type": "string"
@@ -2757,9 +2811,6 @@
         "grossAmount": {
           "type": "number"
         },
-        "message": {
-          "type": "string"
-        },
         "netAmount": {
           "type": "number"
         },
@@ -2998,9 +3049,7 @@
         "_contract": {
           "type": "object",
           "required": [
-            "prodId",
-            "qtyError",
-            "qtyGood"
+            "prodId"
           ],
           "properties": {
             "message": {
@@ -3102,9 +3151,7 @@
         "_contract": {
           "type": "object",
           "required": [
-            "prodId",
-            "qtyError",
-            "qtyGood"
+            "prodId"
           ],
           "properties": {
             "itemId": {
@@ -3598,6 +3645,10 @@
     },
     "ItemArrivalLines": {
       "type": "object",
+            "required": [
+      "lineNum",
+      "itemId"
+      ],
       "properties": {
         "inventBatchExpDate": {
           "type": "string",
@@ -3882,6 +3933,9 @@
     },   
     "AdjustmentJournalLines": {
       "type": "object",
+      "required": [
+      "itemId"
+      ],      
       "properties": {
         "costMarkup": {
           "type": "number",
@@ -4054,6 +4108,9 @@
     },   
     "MovementJournalLines": {
       "type": "object",
+      "required": [
+      "itemId"
+      ],
       "properties": {
         "costMarkup": {
           "type": "number",
@@ -4224,6 +4281,9 @@
     },   
     "CountingJournalLines": {
       "type": "object",
+      "required": [
+      "itemId"
+      ],      
       "properties": {
         "costMarkup": {
           "type": "number",
@@ -4397,6 +4457,9 @@
     },   
     "TransferJournalLines": {
       "type": "object",
+      "required": [
+      "itemId"
+      ],      
       "properties": {               
         "defaultDimensionDisplayValue": {
           "type": "string",
@@ -4549,10 +4612,31 @@
     "Line": {
       "type": "object",
       "properties": {
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },      
         "lineNum": {
           "type": "integer",
           "format": "int32"
         },
+        "externalItemId": {
+          "type": "string"
+        },        
         "itemId": {
           "type": "string"
         },
@@ -4573,20 +4657,94 @@
         },
         "name": {
           "type": "string"
-        }
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        }        
       }
     },
+    "SalesOrderUpdateLine": {
+      "type": "object",
+      "properties": {
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },      
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "externalItemId": {
+          "type": "string"
+        },        
+        "itemId": {
+          "type": "string"
+        },
+        "salesPrice": {
+          "type": "string"
+        },
+        "salesQty": {
+          "type": "string"
+        },
+        "salesUnit": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        } ,    
+        "updateAction": {
+          "type": "string"
+        }            
+      }
+    },    
     "ApiResponse": {
       "type": "object",
+      "required": [
+        "$id",
+        "jobId",
+        "jobStatus",
+        "jobMessage"
+      ],
       "properties": {
         "$id": {
           "type": "string"
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "NOTE! This field will not be sent back for Interfaces set to Asynchronous response."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "NOTE! This field will not be sent back for Interfaces set to Asynchronous response."
         },
         "jobId": {
           "type": "string"
