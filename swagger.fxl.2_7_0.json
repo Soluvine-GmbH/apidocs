@@ -1498,9 +1498,6 @@
             },
             "header": {
               "type": "object",
-              "required": [
-                "transDate"
-              ],
               "properties": {
                 "prodId": {
                   "type": "string",
