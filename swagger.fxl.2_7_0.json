@@ -1561,7 +1561,28 @@
         "wrkCtrId": {
           "type": "string",
           "description": "Resource id in D365 F&O. If not provided, it is retrieved using jobId."
-        }
+        },
+        "worker": {
+          "type": "string"
+        }, 
+        "errorCause": {
+          "type": "string",
+          "description": "Cause of error.<br /> Use enum value: <br /> 0 - None (no value will be displayed) <br /> 1 - Material <br /> 2 - Machine <br /> 3 - Operator",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        } ,
+        "fromTime": {
+          "type": "integer",
+          "description": "Number of seconds after 00:00. Eg. 32400 indicated 09:00 AM."
+        },
+        "toTime": {
+          "type": "integer",
+          "description": "Number of seconds after 00:00. Eg. 32400 indicated 09:00 AM."
+        }                             
       }
     },
     "RouteCard": {
