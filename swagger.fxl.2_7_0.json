@@ -1638,10 +1638,6 @@
        		"type": "string",
             "description": "Lot id."
             },    
-        "jobType": {
-       		"type": "string",
-            "description": "Task type."
-         }, 
         "oprId": {
        		"type": "string",
             "description": "Operation identification."
