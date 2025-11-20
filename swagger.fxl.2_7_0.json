@@ -1490,7 +1490,8 @@
           "type": "object",
           "required": [
             "message",
-            "header"
+            "header",
+            "lines"
           ],
           "properties": {
             "message": {
@@ -1526,7 +1527,8 @@
       "type": "object",
       "required": [
         "hours",
-        "jobId"
+        "jobId",
+        "transDate"
       ],
       "properties": {
         "hours": {
