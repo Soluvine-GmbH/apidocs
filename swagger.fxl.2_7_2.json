@@ -1,0 +1,5042 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is documentation for FlexxWare API from Soluvine GmbH.  You can find out more about Soluvine solutions at [https://soluvine.com/flexxlink](https://soluvine.com/flexxlink).  </br> The FlexxWare API is using REST API to define its endpoints. This page also provides sample Authorization information and sample responses to each API endpoint.",
+    "version": "2.7.0.0",
+    "title": "FlexxWare for Dynamics 365 Finance and Operations",
+    "termsOfService": "https://soluvine.com/",
+    "contact": {
+      "email": "flexx@soluvine.com"
+    },
+    "license": {
+      "name": "Soluvine GmbH",
+      "url": "https://soluvine.com/flexxlink/"
+    }
+  },
+  "host": "yourcloudd365aos.axcloud.dynamics.com",
+  "basePath": "/api/services/",
+  "tags": [
+    {
+      "name": "EDI and B2B interfaces",
+      "description": "Endpoints to integrate EDI messages into D365 F&O.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/"
+      }
+    },
+    {
+      "name": "BVBS interface",
+      "description": "Imports BVBS (Bundesvereinigung Bausoftware) data into D365 F&O",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/"
+      }
+    },
+    {
+      "name": "Production interfaces",
+      "description": "Imports Production data into D365 F&O",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/"
+      }
+    },
+    {
+      "name": "Production interfaces V2",
+      "description": "Imports Production data into D365 F&O",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/"
+      }
+    },    
+    {
+      "name": "Warehouse interfaces",
+      "description": "Imports warehouse data into D365 F&O",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://soluvine.com/"
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/FXLInboundServices_B2B/FXLSalesTableService/createSalesTable": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Upload a sales order. Last updated: 2025-11-04",
+        "x-last-updated": "2025-10-23",
+        "description": "<b>Last updated: 2025-11-04</b>",
+        "operationId": "createSalesTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A new sales order.",
+            "schema": {
+              "$ref": "#/definitions/SalesOrderCreate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_B2B/FXLSalesTableService/updateSalesTable": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Update a sales order.",
+        "description": "",
+        "operationId": "updateFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An update of a sales order.",
+            "schema": {
+              "$ref": "#/definitions/SalesOrderUpdate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_B2B/FXLPurchTableService/createPurchTable": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Create a purchase order.",
+        "description": "",
+        "operationId": "createPurchTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A new purchase order.",
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderCreate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_B2B/FXLPurchTableService/confirmPurchTable": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Confirm a purchase order.",
+        "description": "",
+        "operationId": "confirmPurchTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A confimation of a purchase order.",
+            "schema": {
+              "$ref": "#/definitions/PurchaseOrderConfirm"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_B2B/FXLPurchTableService/invoicePurchTable": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Create a purchase invoice.",
+        "description": "",
+        "operationId": "invoicePurchTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An invoice for a purchase order.",
+            "schema": {
+              "$ref": "#/definitions/InvoicePurchTable"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_B2B/FXLCustCollectionService/confirmCollection": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Confirm a customer collection.",
+        "description": "",
+        "operationId": "confirmCollection",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An invoice for a purchase order.",
+            "schema": {
+              "$ref": "#/definitions/ConfirmCollection"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_B2B/FXLPurchDespatchAdviceService/despatchAdvice": {
+      "post": {
+        "tags": [
+          "EDI and B2B interfaces"
+        ],
+        "summary": "Import Despatch advice information. Last updated: 2025-10-06",
+        "x-last-updated": "2025-10-06",
+        "description": "<b>Last updated: 2025-10-06</b>",
+        "operationId": "despatchAdvice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Import Despatch advice information.",
+            "schema": {
+              "$ref": "#/definitions/DespatchAdvice"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/BVBSFileImportServiceGroup/FXLBVBSImportFileService/importBVBSFile": {
+      "post": {
+        "tags": [
+          "BVBS interface"
+        ],
+        "summary": "Imports a set of BVBS data.",
+        "description": "",
+        "operationId": "importBVBSFile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A set of BVBS data.",
+            "schema": {
+              "$ref": "#/definitions/BvbsImport"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableService/start": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Reports a Production order is started.",
+        "description": "",
+        "operationId": "start",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Start Production Order in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/ProductionStart"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableService/reportAsFinishedProgress": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Reports produced quantities of a production order without ending it.",
+        "description": "",
+        "operationId": "reportAsFinishedProgress",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reports produced quantities of a production order without ending it.",
+            "schema": {
+              "$ref": "#/definitions/ProductionProgress"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableService/reportAsFinishedCompleted": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Reports produced quantities of a production order and ends it.",
+        "description": "",
+        "operationId": "reportAsFinishedCompleted",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reports produced quantities of a production order and ends it.",
+            "schema": {
+              "$ref": "#/definitions/ProductionFinished"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableService/statusDecrease": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Reports status change of a production order.",
+        "description": "",
+        "operationId": "statusDecrease",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reports status change of a production order.",
+            "schema": {
+              "$ref": "#/definitions/StatusDecrease"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdJournalService/pickingList": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Creates a picking list for production orders material consumption.",
+        "description": "",
+        "operationId": "pickingList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates a picking list for production orders material consumption.",
+            "schema": {
+              "$ref": "#/definitions/PickingList"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdJournalService/routeCard": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Creates a route card to record time for production orders.",
+        "description": "",
+        "operationId": "routeCard",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates a route card to record time for production orders.",
+            "schema": {
+              "$ref": "#/definitions/RouteCard"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdJournalService/jobCard": {
+      "post": {
+        "tags": [
+          "Production interfaces"
+        ],
+        "summary": "Creates a job card to record time for production orders.",
+        "description": "",
+        "operationId": "jobCard",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates a job card to record time for production orders.",
+            "schema": {
+              "$ref": "#/definitions/JobCard"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableV2Service/start": {
+      "post": {
+        "tags": [
+          "Production interfaces V2"
+        ],
+        "summary": "Reports a Production order is started.",
+        "description": "",
+        "operationId": "startV2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Start Production Order in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/ProductionStartV2"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_Prod/FXLProdTableV2Service/reportAsFinishedProgress": {
+      "post": {
+        "tags": [
+          "Production interfaces V2"
+        ],
+        "summary": "Reports produced quantities of a production order.",
+        "description": "",
+        "operationId": "reportAsFinishedProgressV2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reports produced quantities of a production order.",
+            "schema": {
+              "$ref": "#/definitions/ProductionProgressV2"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },       
+    "/FXLInboundServices_Prod/FXLProdTableV2Service/reportAsFinishedCompleted": {
+      "post": {
+        "tags": [
+          "Production interfaces V2"
+        ],
+        "summary": "Reports produced quantities of a production order and ends it.",
+        "description": "",
+        "operationId": "reportAsFinishedCompletedV2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reports produced quantities of a production order and ends it.",
+            "schema": {
+              "$ref": "#/definitions/ProductionFinishedV2"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },    
+    "/FXLInboundServices_Prod/FXLProdTableV2Service/statusDecrease": {
+      "post": {
+        "tags": [
+          "Production interfaces V2"
+        ],
+        "summary": "Reports status change of a production order.",
+        "description": "",
+        "operationId": "statusDecreaseV2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reports status change of a production order.",
+            "schema": {
+              "$ref": "#/definitions/StatusDecreaseV2"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    
+    "/FXLInboundServices_WMS/FXLWMSJournalService/createWMSJournal": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Creates item arrival journal.",
+        "description": "",
+        "operationId": "createWMSJournal",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create item arrival journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/ItemArrivalCreate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_WMS/FXLWMSPickingRegistrationService/registerPickList": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers a picking list",
+        "description": "",
+        "operationId": "registerPickList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register picking list in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/PickingListRegistration"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },
+    "/FXLInboundServices_WMS/FXLInventJournalService/movement": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers inventory movement journal",
+        "description": "",
+        "operationId": "movement",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register a movement journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/MovementJournal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },    
+    "/FXLInboundServices_WMS/FXLInventJournalService/lossProfit": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers inventory adjustment journal",
+        "description": "",
+        "operationId": "adjustment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register an adjustment journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/AdjustmentJournal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },   
+    "/FXLInboundServices_WMS/FXLInventJournalService/count": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers an item counting journal",
+        "description": "",
+        "operationId": "counting",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register an item counting journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/CountingJournal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },    
+    "/FXLInboundServices_WMS/FXLInventJournalService/transfer": {
+      "post": {
+        "tags": [
+          "Warehouse interfaces"
+        ],
+        "summary": "Registers an item transfer journal",
+        "description": "",
+        "operationId": "transfer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register an item transfer journal in D365 F&O.",
+            "schema": {
+              "$ref": "#/definitions/TransferJournal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    },             
+    "/FXLInboundServices/FXLIntegrationStatusLogService/getStatus": {
+      "post": {
+        "tags": [
+          "Status log interface"
+        ],
+        "summary": "Retrieve status and log information of a FlexxLink message.",
+        "description": "",
+        "operationId": "getStaus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Retrieves status and log information of a FlexxLink message.",
+            "schema": {
+              "$ref": "#/definitions/GetStatus"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiStatusResponse"
+            }
+          },
+          "400": {
+            "description": "bad request structure",
+            "schema": {
+              "$ref": "#/definitions/Api400Response"
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/Api500Response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetStatus": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "integrationJobId": {
+              "type": "string",
+              "description": "Use integrationJobId or messageId to get the status and log information. If both are provided, integrationJobId is used to get the information."
+            },
+            "messageId": {
+              "type": "string",
+              "description": "Use integrationJobId or messageId to get the status and log information. If both are provided, integrationJobId is used to get the information."
+            }
+          }
+        }
+      }
+    },
+    "StatusDecrease": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "prodId"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "prodId": {
+              "type": "string",
+              "description": "Number of the production order."
+            },
+            "prodStatus": {
+              "type": "string",
+              "description": "Status of a production order that should be set. See enum for possible values.",
+              "enum": [
+                "Created",
+                "CostEstimated",
+                "Scheduled",
+                "Released",
+                "StartedUp",
+                "ReportedFinished",
+                "Completed"
+              ]
+            },
+            "reverseDerivedProd": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "StatusDecreaseV2": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "prodId"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "prodId": {
+              "type": "string",
+              "description": "Number of the production order."
+            },
+            "lines":{
+              "type": "array",
+              "description": "Items to change the status.",
+              "items": {
+              "$ref": "#/definitions/StatusDecreaseLineV2"
+            }
+          }
+        }
+      }
+      }
+    },   
+    
+    "StatusDecreaseLineV2": {
+      "type": "object",
+      "properties": {
+            "prodStatus": {
+              "type": "string",
+              "description": "Status of a production order that should be set. See enum for possible values.",
+              "enum": [
+                "Created",
+                "CostEstimated",
+                "Scheduled",
+                "Released",
+                "StartedUp",
+                "ReportedFinished",
+                "Completed"
+              ]
+            },
+            "reverseDerivedProd": {
+              "type": "boolean",
+              "description": "The order and all operations that are associated with the routes revert to a previous step in the production life cycle."
+            },
+            "externalRef": {
+              "type": "string",
+              "description": "External reference."
+            }
+          }
+    },  
+         
+    "JobCard": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "header",
+            "lines"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "type": "object",
+              "properties": {
+                "prodId": {
+                  "type": "string",
+                  "description": "The value from the header will be used (1) on the line in case no value is given on the line, (2) for Production journals header Production Id value."
+                },
+                "wrkCtrId": {
+                  "type": "string",
+                  "description": "The value from the header will be used on the line in case no value is given on the line."
+                },
+                "externalRef": {
+                  "type": "string"
+                }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobCardLines"
+              }
+            }
+          }
+        }
+      }
+    },
+    "JobCardLines": {
+      "type": "object",
+      "required": [
+        "hours",
+        "jobId",
+        "transDate"
+      ],
+      "properties": {
+        "defaultDimensionDisplayValue": {
+          "type": "string",
+          "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+        },         
+        "hours": {
+          "type": "number"
+        },
+        "jobFinished": {
+          "type": "boolean",
+          "description": "If true, sets job to finished."
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "oprFinished": {
+          "type": "boolean",
+          "description": "If true, sets operation to completed."
+        },
+        "prodId": {
+          "type": "string"
+        },
+        "qtyError": {
+          "type": "number"
+        },
+        "qtyGood": {
+          "type": "number"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "wrkCtrId": {
+          "type": "string",
+          "description": "Resource id in D365 F&O. If not provided, it is retrieved using jobId."
+        },
+        "worker": {
+          "type": "string"
+        }, 
+        "errorCause": {
+          "type": "string",
+          "description": "Cause of error.<br /> Use enum value: <br /> 0 - None (no value will be displayed) <br /> 1 - Material <br /> 2 - Machine <br /> 3 - Operator",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        } ,
+        "fromTime": {
+          "type": "integer",
+          "description": "Number of seconds after 00:00. Eg. 32400 indicated 09:00 AM."
+        },
+        "toTime": {
+          "type": "integer",
+          "description": "Number of seconds after 00:00. Eg. 32400 indicated 09:00 AM."
+        }                             
+      }
+    },
+    "RouteCard": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "header",
+            "lines"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "type": "object",
+              "properties": {
+                  "externalRef": {
+                  "type": "string",
+                  "description": "External reference."
+                },
+                "prodId": {
+                  "type": "string",
+                  "description": "The value from the header will be used (1) on the line in case no value is given on the line, (2) for Production journals header Production Id value."
+                },
+                "wrkCtrId": {
+                  "type": "string",
+                  "description": "Resource in D365. <br />The value from the header will be used on the line in case no value is given on the line."
+                }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RouteCardLines"
+              }
+            }
+          }
+        }
+      }
+    },
+    "RouteCardLines": {
+      "type": "object",
+      "required": [
+        "transDate"
+      ],
+      "properties": {
+        "defaultDimensionDisplayValue": {
+          "type": "string",
+          "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+        },   
+        "errorCause": {
+          "type": "string",
+          "description": "Cause of error.<br /> Use enum value: <br /> 0 - None (no value will be displayed) <br /> 1 - Material <br /> 2 - Machine <br /> 3 - Operator",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        },  
+       "externalRef": {
+       		"type": "string",
+            "description": "External reference."
+            },                    
+        "hours": {
+          "type": "number",
+          "description": "Hours or one of qty fields is mandatory."
+        },
+       "inventTransId": {
+       		"type": "string",
+            "description": "Lot id."
+            },    
+        "oprId": {
+       		"type": "string",
+            "description": "Operation identification."
+         },                    
+        "oprFinished": {
+          "type": "boolean",
+          "description": "If true, sets operation to completed."
+        },
+        "oprNum": {
+          "type": "integer",
+          "description": "Defines where the operation occurs in the sequence of operations for the production."
+        },
+        "oprPriority": {
+          "type": "integer",
+          "description": "Operation priority <br /> 0 - Primary operation <br /> 1 - Secondary operation 1 <br /> 2 - Secondary operation 2 <br /> 3 - Secondary operation 3 <br /> 4 - Secondary operation 4 <br /> 5 - Secondary operation 5 <br /> 6 - Secondary operation 6",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "prodId": {
+          "type": "string"
+        },
+        "qtyGood": {
+          "type": "number",
+          "description": "Hours or one of qty fields is mandatory."
+        },
+        "qtyError": {
+          "type": "number",
+          "description": "Hours or one of qty fields is mandatory."
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "worker": {
+          "type": "string",
+          "description": "Hours or one of qty fields is mandatory."
+        },        
+        "wrkCtrId": {
+          "type": "string",
+          "description": "Resource id in D365 F&O"
+        }
+      }
+    },
+    "PickingList": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "header",
+            "lines"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "type": "object",
+              "properties": {
+                "externalRef": {
+                  "type": "string",
+                  "description": "External reference."
+                },
+                "prodId": {
+                  "type": "string",
+                  "description": "The value from the header will be used (1) on the line in case no value is given on the line, (2) for Production journals header Production Id value."
+                },
+                "wrkCtrId": {
+                  "type": "string",
+                  "description": "The value from the header will be used on the line in case no value is given on the line."
+                }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PickingListLines"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PickingListLines": {
+      "type": "object",
+      "required": [
+        "itemId",
+        "transDate"
+      ],
+      "properties": {
+        "bomScrap": {
+              "type": "number",
+              "description": "Amount of scrap for Bill of Materials."
+            },
+        "bomUnitId": {
+              "type": "string",
+              "description": "Unit identification. <br /> Mandatory if no inventTransId provided."
+            },  
+        "defaultDimensionDisplayValue": {
+              "type": "string",
+              "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+            },  
+         "endConsump": {
+              "type": "enum",
+              "description": "End of consumption checkmark (1 - Yes, 0 - No).",
+            "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+            }, 
+        "errorCause": {
+          "type": "string",
+          "description": "Cause of error.<br /> Use enum value: <br /> 0 - None (no value will be displayed) <br /> 1 - Material <br /> 2 - Machine <br /> 3 - Operator",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        },  
+        "externalRef": {
+                  "type": "string",
+                  "description": "External reference."
+                }, 
+        "inventConsump": {
+              "type": "number",
+              "description": "Amount of material consumed during production."
+            },                                                                  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },
+        "inventProposal": {
+              "type": "number",
+              "description": "Suggested amount to be picked."
+            },  
+         "inventReturnFlag": {
+              "type": "enum",
+              "description": "End reporting Return flag (1 - Yes, 0 - No).",
+            "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+            },             
+        "inventTransId": {
+          "type": "string",
+          "description": "LotId in Dynamics 365"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string",
+          "description": "BOM position reference."
+        },        
+        "prodId": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "number"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "wrkCtrId": {
+          "type": "string",
+          "description": "Resource id in D365 F&O. If Site, Warehouse and Location are empty, then input location from wrkCtrId is used."
+        },
+        "oprNum": {
+          "type": "integer",
+          "description": "Defines where the operation occurs in the sequence of operations for the production."
+        }
+      }
+    },
+    "ConfirmCollection": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/CollectionHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CollectionLines"
+              }
+            }
+          }
+        }
+      }
+    },
+    "InvoicePurchTable": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/PurchaseInvoiceHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseInvoiceLine"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SalesOrderUpdate": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/SalesOrderUpdateHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SalesOrderUpdateLine"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SalesOrderCreate": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/Header"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Line"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "_contract": {
+          "message": {
+            "companyId": "usmf",
+            "description": "Test integration",
+            "applicationId": "Backend System",
+            "messageId": "abcd-1234-efgh-5678",
+            "messageTimestamp": "YYYY-MM-DDTHH:mm:ss"
+          },
+          "header": {
+            "barcode": "03294782374",
+            "receiptDateRequested": "2022-04-12T00:00:00.000Z",
+            "shippingDateRequested": "2022-05-25T00:00:00.000Z",
+            "custAccount": "234987",
+            "gLNCode": "4305615009999",
+            "customerRef": "PO123456",
+            "purchOrderFormNum": "101183255",
+            "currencyCode": "EUR",
+            "deliveryName": "Warehouse No. 1",
+            "deliveryCity": "Atlanta",
+            "deliveryCountryRegionId": "Piedmont",
+            "deliveryState": "Georgia",
+            "deliveryStreet": "Everrest Street",
+            "deliveryZipCode": "98122-US",
+            "dlvMode": "Freight",
+            "dlvTerm": "30 days",
+            "salesType": "Sales",
+            "shipComplete": true,
+            "email": "test@testemail.com",
+            "contactPersonName": "John Smith",
+            "phone": "0932472834691",
+            "notes": "Verification message",
+            "lines": [
+              {
+                "lineNum": 1,
+                "itemId": "4305615615318",
+                "salesPrice": 10,
+                "salesQty": 408,
+                "salesUnit": "PCE",
+                "inventDim": {
+                    "batchId": "",
+                    "colorId": "",
+                    "configId": "",
+                    "licensePlateId": "",
+                    "locationId": "24",
+                    "ownerId": "",
+                    "serialId": "",
+                    "siteId": "2",
+                    "sizeId": "",
+                    "statusId": "Available",
+                    "styleId": "",
+                    "wmsLocationId": "BULK-001"
+                }, 
+                "itemBarCode": "4305615615318",
+                "globalTradeItemNumber": "4305615615318",
+                "name": "Contoso Item"
+              },
+              {
+                "lineNum": 2,
+                "itemId": "4305615616429",
+                "salesPrice": 20,
+                "salesQty": 30,
+                "salesUnit": "PCE",
+"inventDim": {
+                    "batchId": "",
+                    "colorId": "",
+                    "configId": "",
+                    "licensePlateId": "",
+                    "locationId": "24",
+                    "ownerId": "",
+                    "serialId": "",
+                    "siteId": "2",
+                    "sizeId": "",
+                    "statusId": "Available",
+                    "styleId": "",
+                    "wmsLocationId": "BULK-001"
+                },                
+                "itemBarCode": "4305615616429",
+                "globalTradeItemNumber": "4305615616429",
+                "name": "Contoso Item"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "PurchaseOrderConfirm": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/PurchaseConfirmHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseConfirmLine"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "required": [
+        "applicationId",
+        "companyId"
+      ],
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "messageId": {
+          "type": "string"
+        },
+        "messageTimeStamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Header": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "contactPersonName": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "deliveryAddress": {
+          "type": "string",
+          "format": "deprecated"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },        
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },
+        "dlvMode": {
+          "type": "string"
+        },
+        "dlvTerm": {
+          "type": "string"
+        },
+        "salesPoolId": {
+          "type": "string"
+        },        
+        "salesType": {
+          "type": "string",
+                      "enum": [
+          	"Yes",
+            "No",
+            "0",
+            "1"
+         ]
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fXLWorkerSalesTaker": {
+          "type": "string"
+        },        
+        "notes": {
+          "type": "string"
+        },
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesOrderUpdateHeader": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "contactPersonName": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "deliveryAddress": {
+          "type": "string",
+          "format": "deprecated"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },        
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },
+        "dlvMode": {
+          "type": "string"
+        },
+        "dlvTerm": {
+          "type": "string"
+        },
+        "salesPoolId": {
+          "type": "string"
+        },        
+        "salesType": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fXLWorkerSalesTaker": {
+          "type": "string"
+        },        
+        "notes": {
+          "type": "string"
+        },
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },    
+        "updateAction": {
+          "type": "string"
+        }  
+      }
+    },    
+    "CollectionHeader": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "isCredit": {
+          "type": "number"
+        },
+        "paymMode": {
+          "type": "string"
+        },
+        "paymReference": {
+          "type": "string"
+        },
+        "receiverBankAccount": {
+          "type": "string"
+        },
+        "receiverBankName": {
+          "type": "string"
+        },
+        "receiverIBAN": {
+          "type": "string"
+        },
+        "receiverSWIFTNo": {
+          "type": "string"
+        },
+        "senderBankAccount": {
+          "type": "string"
+        },
+        "senderBankName": {
+          "type": "string"
+        },
+        "senderIBAN": {
+          "type": "string"
+        },
+        "senderSWIFTNo": {
+          "type": "string"
+        },
+        "settlementDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Precision of two decimals."
+        },
+        "transDateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "PurchaseOrderCreate": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/PurchaseHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseLine"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PurchaseInvoiceHeader": {
+      "type": "object",
+      "required": [
+        "orderAccount",
+        "documentNum"
+      ],
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "discPercent": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "documentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "documentNum": {
+          "type": "string"
+        },
+        "fileData": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64 encoded document. Accepts PDF, MSG, TIFF, JPG."
+        },
+        "fXLImportId": {
+          "type": "string"
+        },
+        "fXLWorkerPurchPlacer": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        },
+        "custAccount": {
+          "type": "string"
+        },
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "customerRef": {
+          "type": "string"
+        },
+        "updateAction": {
+          "type": "string"
+        },
+        "vendorRef": {
+          "type": "string"
+        },
+        "workerPurchPlacer": {
+          "type": "integer"
+        }
+      }
+    },
+    "PurchaseHeader": {
+      "type": "object",
+      "required": [
+        "orderAccount",
+        "documentNum"
+      ],
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "discPercent": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "documentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "documentNum": {
+          "type": "string"
+        },
+        "fXLWorkerPurchPlacer": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        },
+        "postConfirm": {
+          "type": "integer",
+          "enum": [
+          	1,
+            0
+          ],
+          "description": "1 - Post order confirmation, 0 - Do not post order confirmation."          
+        },        
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "vendorRef": {
+          "type": "string"
+        },
+        "workerPurchPlacer": {
+          "type": "integer"
+        }
+      }
+    },
+    "PurchaseConfirmHeader": {
+      "type": "object",
+      "required": [
+        "orderAccount",
+        "documentNum"
+      ],
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "discPercent": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "documentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "documentNum": {
+          "type": "string"
+        },
+        "fXLImportId": {
+          "type": "string"
+        },
+        "fXLWorkerPurchPlacer": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "invoiceAccount": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        },
+        "purchOrderFormNum": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        },
+        "updateAction": {
+          "type": "string"
+        },
+        "vendorRef": {
+          "type": "string"
+        },
+        "workerPurchPlacer": {
+          "type": "integer"
+        }
+      }
+    },
+    "PurchaseLine": {
+      "type": "object",
+      "properties": {
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string"
+        },
+        "externalItemId": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string",
+          "description": "Used if item identification is set to GTIN number."
+        },
+        "intrastatCommodity": {
+          "type": "string",
+          "description": "Commodity code of the item."
+        },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
+                "statusId": {
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
+                }
+              }
+            },        
+        "itemBarCode": {
+          "type": "string",
+          "description": "Used if item identification is set to Barcode."
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "linePercent": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "origCountryRegionId": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string",
+          "description": "Port where the current load is ordered. Used for intrastat reporting."
+        },
+        "purchPrice": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchQty": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchUnit": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        }        
+      }
+    },
+    "PurchaseConfirmLine": {
+      "type": "object",
+      "properties": {
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string"
+        },
+        "externalItemId": {
+          "type": "string"
+        },
+        "fxlImportId": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "intrastatCommodity": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "linePercent": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "message": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "origCountryRegionId": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "priceUnit": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchPrice": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchQty": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchUnit": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "string"
+        },
+        "updateAction": {
+          "type": "string"
+        }
+      }
+    },
+    "PurchaseInvoiceLine": {
+      "type": "object",
+      "properties": {
+        "confirmedDlv": {
+          "type": "string"
+        },
+        "deliveryDate": {
+          "type": "string"
+        },
+        "externalItemId": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "intrastatCommodity": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "linePercent": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "origCountryRegionId": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "purchPrice": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchQty": {
+          "type": "number",
+          "description": "Precision of two digits"
+        },
+        "purchUnit": {
+          "type": "string"
+        },
+        "shipComplete": {
+          "type": "boolean"
+        }                
+      }
+    },
+    "CollectionLines": {
+      "type": "object",
+      "properties": {
+        "discAmount": {
+          "type": "number"
+        },
+        "documentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "grossAmount": {
+          "type": "number"
+        },
+        "netAmount": {
+          "type": "number"
+        },
+        "paymAmount": {
+          "type": "number"
+        },
+        "paymentReference": {
+          "type": "string"
+        },
+        "paymentReferenceType": {
+          "type": "string"
+        }
+      }
+    },
+    "DespatchAdvice": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "header": {
+              "$ref": "#/definitions/DespatchAdviceHeader"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DespatchAdviceLine"
+              }
+            }
+          }
+        }
+      }
+    },
+    "DespatchAdviceHeader": {
+      "type": "object",
+      "properties": {
+        "barCode": {
+          "type": "string"
+        },
+        "gLNCode": {
+          "type": "string"
+        },
+        "notificationid": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        }
+      }
+    },     
+    "DespatchAdviceLine": {
+      "type": "object",
+      "properties": {
+              "externalItemId": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer"
+        },
+        "orderId": {
+          "type": "string"
+        },
+            "packages": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DespatchAdvicePackage"
+              }
+            },        
+        "qty": {
+          "type": "integer"
+        }       
+      }
+    },      
+    "DespatchAdvicePackage": {
+      "type": "object",
+      "properties": {
+        "packageId0": {
+          "type": "string"
+        },
+        "packageId1": {
+          "type": "string"
+        },      
+        "qty": {
+          "type": "integer"
+        }       
+      }
+    },     
+    "BvbsImport": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BvbsLine"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "_contract": {
+          "message": {
+            "companyId": "usmf",
+            "fromSystem": "Azure Integration",
+            "description": "Test Integration",
+            "applicationId": "BVBS"
+          },
+          "lines": {
+            "BOMItemId": "bi1234-56789",
+            "FileName": "test_bvbs_input_file.bvbs",
+            "Geometrie": "l10w10l10w10",
+            "Length": 10,
+            "MeshType": "Q188",
+            "PlanId": "04321",
+            "PositionNo": "1",
+            "ProjectId": "pbi2219",
+            "Qty": 1,
+            "Quality": "B500",
+            "ReinforcementType": "Rod",
+            "RodDiameter": 10,
+            "RollDiameter": 10,
+            "Weight": 10.123456,
+            "Width": 10
+          }
+        }
+      }
+    },
+    "BvbsLine": {
+      "type": "object",
+      "properties": {
+        "BOMItemId": {
+          "type": "string"
+        },
+        "FileName": {
+          "type": "string"
+        },
+        "Geometrie": {
+          "type": "string"
+        },
+        "Length": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MeshType": {
+          "type": "string"
+        },
+        "PlanId": {
+          "type": "string"
+        },
+        "PositionNo": {
+          "type": "string"
+        },
+        "ProjectId": {
+          "type": "string"
+        },
+        "Qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Quality": {
+          "type": "string"
+        },
+        "ReinforcementType": {
+          "type": "string"
+        },
+        "RodDiameter": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RollDiameter": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Weight": {
+          "type": "number",
+          "description": "Precision of six digits."
+        },
+        "Width": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ProductionStart": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "prodId"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "prodId": {
+              "type": "string"
+            },
+            "qtyStart": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "example": {
+        "_contract": {
+          "message": {
+            "applicationId": "ProdSystem",
+            "companyId": "usmf",
+            "description": "Production start message",
+            "messageId": "abcd-1234-efgh-5678",
+            "messageTimeStamp": "YYYY-MM-DDTHH:mm:ss"
+          },
+          "prodId": "usmf-000027349",
+          "qtyStart": 1
+        }
+      }
+    },
+    "ProductionFinished": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "prodId"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "itemId": {
+              "type": "string"
+            },
+            "processingTime": {
+              "type": "number",
+              "description": "Precision of two digits. Unit defined in D365. If provided, must match delta of timestampStarted and timestampFinished."
+            },
+            "prodId": {
+              "type": "string"
+            },
+            "qtyError": {
+              "type": "number",
+              "description": "Precision of two digits."
+            },
+            "qtyGood": {
+              "type": "number",
+              "description": "Precision of two digits."
+            },
+            "resource": {
+              "type": "string",
+              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job"
+            },
+            "timestampFinished": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "timestampStarted": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
+                "statusId": {
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
+                }
+              }
+            },
+            "jobId": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ProductionProgress": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "prodId"
+          ],
+          "properties": {
+            "itemId": {
+              "type": "string"
+            },
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "processingTime": {
+              "type": "number",
+              "description": "Precision of two digits. Unit defined in D365. If provided, must match delta of timestampStarted and timestampFinished."
+            },
+            "prodId": {
+              "type": "string"
+            },
+            "qtyError": {
+              "type": "number",
+              "description": "Precision of two digits."
+            },
+            "qtyGood": {
+              "type": "number",
+              "description": "Precision of two digits."
+            },
+            "resource": {
+              "type": "string",
+              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job"
+            },
+            "timestampFinished": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "timestampStarted": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
+                "statusId": {
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
+                }
+              }
+            },
+            "jobId": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ProductionStartV2": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "message",
+            "prodId"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "prodId": {
+              "type": "string"
+            },
+            "lines": {
+              "type": "array",
+              "description": "Items to start.",
+              "items": {
+              "$ref": "#/definitions/ProductionStartLineV2"
+              }
+            }
+          }
+        }
+      }
+    },  
+    "ProductionStartLineV2": {
+      "type": "object",
+      "properties": {
+            "qtyStart": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "externalRef": {
+              "type": "string"
+            }                   
+          }
+    },  
+    "ProductionFinishedV2Line": {
+    	"type": "object",
+    	"properties": {
+    	"itemId": {
+              "type": "string",
+              "description": "Item number."
+            },
+               	  "processingTime": {
+              "type": "integer",
+              "description": "Processing time."
+            },             
+         "qtyError": {
+              "type": "number",
+              "description": "Precision of two digits."
+            }, 
+                     "errorCause": {
+              "type": "string",
+              "description": "Cause of error."
+            },   
+    	"qtyGood": {
+              "type": "number",
+              "description": "Precision of two digits."
+            },
+            "resource": {
+              "type": "string",
+              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job."
+            },
+            "externalRef": {
+              "type": "string",
+              "description": "External reference."
+            },            
+            "timestampFinished": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "timestampStarted": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "jobId": {
+           "type": "string"
+        },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
+                "statusId": {
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
+                }
+    	}
+    }
+         }
+    },
+    "ProductionFinishedV2": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "prodId",
+            "message"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "prodId": {
+              "type": "string"
+            },
+            
+
+            "lines": {
+              "type": "array",
+              "description": "List of lines.",
+              "items": {
+                "$ref": "#/definitions/ProductionFinishedV2Line"
+              }
+            },
+
+               	"jobId": {
+           "type": "string"
+        }
+             }
+            }
+
+          }
+
+    },  
+    "ProductionProgressV2Line": {
+    	"type": "object",
+    	          "required": [
+            "itemId"
+          ],
+    	"properties": {
+    	  "itemId": {
+              "type": "string",
+              "description": "Item number."
+            },
+               	  "processingTime": {
+              "type": "integer",
+              "description": "Processing time."
+            }, 
+         "qtyError": {
+              "type": "number",
+              "description": "Precision of two digits."
+            }, 
+                     "errorCause": {
+              "type": "string",
+              "description": "Cause of error."
+            },             
+    	"qtyGood": {
+              "type": "number",
+              "description": "Precision of two digits."
+            },
+            "resource": {
+              "type": "string",
+              "description": "If jobId is not specified, then resource ID is used to locate first assigned operation/job"
+            },
+            "externalRef": {
+              "type": "string",
+              "description": "External reference."
+            },              
+            "timestampFinished": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "timestampStarted": {
+              "type": "string",
+              "format": "date-time"
+            },
+             "jobId": {
+           "type": "string"
+        },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
+                "statusId": {
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
+                }
+    	}
+    }
+
+         }
+
+    },
+    "ProductionProgressV2": {
+      "type": "object",
+      "properties": {
+        "_contract": {
+          "type": "object",
+          "required": [
+            "prodId",
+            "message"
+          ],
+          "properties": {
+            "message": {
+              "$ref": "#/definitions/Message"
+            },
+            "prodId": {
+              "type": "string"
+            },
+            "lines": {
+              "type": "array",
+              "description": "List of lines.",
+              "items": {
+                "$ref": "#/definitions/ProductionProgressV2Line"
+              }
+            }
+            
+             }
+            }
+
+          }
+
+    },    
+      
+    "ItemArrivalCreate": {
+    "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/ItemArrivalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemArrivalLines"
+          }
+        }
+      }
+    }
+    }
+    },
+    "ItemArrivalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "inventTransRefId": {
+          "type": "string",
+          "description": "If not known skip this field and use orderAccount and purchOrderFormNum (customer requisition) to identify reference for posting."
+        },
+        "inventTransType": {
+          "type": "string",
+          "description": "Use Purch as value for Purchase order reference. Use Sales for Sales order reference."
+        },
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },
+        "orderAccount": {
+          "type": "string"
+        },        
+        "packingSlipId": {
+          "type": "string"
+        },
+        "postJournal": {
+          "type": "string",
+          "enum": [
+          	"Yes",
+            "No"
+          ]
+         },
+        "purchOrderFormNum": {
+          "type": "string"
+        },         
+        "returnDispositionCodeId": {
+        	"type": "string"  
+        },
+        "returnItemNum": {
+        	"type": "string"  
+        },
+        "externalRef": {
+        	"type": "string"  
+        },
+        "inventDim": {
+        	"type": "object",
+        	"properties": {
+        		"licensePlateId": {
+	        		"type": "string"  
+	        	},
+	        	"locationId": {
+	        		"type": "string"  
+	        	},
+	        	"palletId": {
+	        		"type": "string"  
+	        	},
+	        	"serialId": {
+	        		"type": "string"  
+	        	},
+	        	"siteId": {
+	        		"type": "string"  
+	        	},
+	        	"wmsLocationId": {
+	        		"type": "string"  
+	        	}
+        	}
+        }
+      }
+    },
+    "ItemArrivalLines": {
+      "type": "object",
+            "required": [
+      "lineNum",
+      "itemId"
+      ],
+      "properties": {
+        "inventBatchExpDate": {
+          "type": "string",
+          "format": "date-time",
+          "default": "1900-01-01T00:00:00Z",
+          "description": "<b>IMPORTANT: If the field is used, it has to contain a date-time value.<br /> If no value is required, the field must not be used or the default value must be used.</b> "
+        },
+        "inventTransId": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itmClose": {
+          "type": "string",
+          "enum": [
+          	"Yes",
+            "No"
+          ]
+         },        
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },     
+        "externalRef": {
+          "type": "string"
+        },
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        }           
+      }
+    },
+    "PickingListRegistration": {
+      "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/PickingListRegistrationHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PickingListRegistrationLines"
+          }
+        }
+      }
+    }
+    }
+    },
+    "PickingListRegistrationHeader": {
+      "type": "object",
+      "required": [
+            "journalId"
+          ],
+      "properties": {
+        "journalId": {
+          "type": "string"
+        },
+        "packingSlipId": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        }        
+      }
+    },
+    "PickingListRegistrationLines": {
+      "type": "object",
+      "required": [
+            "itemId",
+            "inventTransId"
+          ],      
+      "properties": {
+        "externalRef": {
+          "type": "string"
+        },      
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inventTransId": {
+          "type": "string",
+          "description": "Lot id"
+        },
+        "inventDim": {
+        	"type": "object",
+        	"properties": {
+        		"batchId": {
+        			"type": "string",
+        			"description": "Tracking dimension: Batch number"
+        		},
+                "colorId": {
+                	"type": "string",
+                	"description": "Product dimension: Color"
+                },
+                        "configId": {
+                            "type": "string",
+                            "description": "Product dimension: Configuration"
+                        },
+                        "licensePlateId": {
+                            "type": "string",
+                            "description": "Storage dimension: License plate"
+                        },
+                        "locationId": {
+                            "type": "string",
+                            "description": "Storage dimension: Warehouse"
+                        },
+                        "ownerId": {
+                            "type": "string",
+                            "description": "Tracking dimension: Owner"
+                        },
+                        "serialId": {
+                            "type": "string",
+                            "description": "Tracking dimension: Serial number"
+                        },
+                        "siteId": {
+                            "type": "string",
+                            "description": "Storage dimension: Site"
+                        },
+                        "sizeId": {
+                            "type": "string",
+                            "description": "Storage dimension: Size"
+                        },
+                        "statusId": {
+                            "type": "string",
+                            "description": "Storage dimension: Inventory status"
+                        },
+                        "styleId": {
+                            "type": "string",
+                            "description": "Product dimension: Style"
+                        },
+                        "wmsLocationId": {
+                            "type": "string",
+                            "description": "Storage dimension: Location"
+                        }                        
+        	}
+       }
+      }
+    },
+    "AdjustmentJournal": {
+            "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/AdjustmentJournalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdjustmentJournalLines"
+          }
+        }
+      }
+    }
+    }
+    },
+    "AdjustmentJournalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "inventLocationId": {
+          "type": "string"
+        },   
+        "inventSiteId": {
+          "type": "string"
+        },                  
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },
+        "offsetAccount": {
+          "type": "string"
+        },        
+        "postJournal": {
+          "type": "string",
+           "enum": [
+                "Yes",
+                "No"
+             ]
+        }
+      }
+    },   
+    "AdjustmentJournalLines": {
+      "type": "object",
+      "required": [
+      "itemId"
+      ],      
+      "properties": {
+        "costMarkup": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits.</br>Charges on cost. "
+        }, 
+        "costPrice": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits.</br>Specifies the cost per unit to refer to inventory receipts."
+        },  
+        "defaultDimensionDisplayValue": {
+          "type": "string",
+          "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+        },         
+        "externalRef": {
+          "type": "string",
+          "description": "External reference as assigned by the sender. This value is not posted into D365 journal."
+        },  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },                         	
+       "inventTransIdReturn": {
+          "type": "string",
+          "description": "Return lot Id. Used for returned goods. Value from the original Sales line."
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offsetAccount": {
+          "type": "string"
+        }, 
+        "priceUnitQty": {
+          "type": "number"
+        },          
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the inventory transfer."
+        },
+        "unit": {
+          "type": "string"
+        },
+        "unitQty": {
+          "type": "number"
+        }          
+      }
+    },           
+    "MovementJournal": {
+      "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/MovementJournalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MovementJournalLines"
+          }
+        }
+      }
+    }
+    }
+    },
+    "MovementJournalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "inventLocationId": {
+          "type": "string"
+        },   
+        "inventSiteId": {
+          "type": "string"
+        },                  
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },
+        "offsetAccount": {
+          "type": "string"
+        },        
+        "postJournal": {
+          "type": "string",
+           "enum": [
+                "Yes",
+                "No"
+             ]
+        }
+      }
+    },   
+    "MovementJournalLines": {
+      "type": "object",
+      "required": [
+      "itemId"
+      ],
+      "properties": {
+        "costMarkup": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "costPrice": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "defaultDimensionDisplayValue": {
+          "type": "string",
+          "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+        },         
+        "externalRef": {
+          "type": "string"
+        },  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },                         	
+       "inventTransIdReturn": {
+          "type": "string",
+          "description": "Return lot id"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offsetAccount": {
+          "type": "string"
+        },                 
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "unitQty": {
+          "type": "number"
+        }          
+      }
+    },   
+    
+    "CountingJournal": {
+      "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/CountingJournalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CountingJournalLines"
+          }
+        }
+      }
+    }
+    }
+    },  
+    
+    "CountingJournalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "inventLocationId": {
+          "type": "string"
+        },   
+        "inventSiteId": {
+          "type": "string"
+        },                  
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },      
+        "postJournal": {
+          "type": "string",
+           "enum": [
+                "Yes",
+                "No"
+             ]
+        },
+        "worker": {
+          "type": "string",
+          "description": "Id of a worker."
+        }
+      }
+    },   
+    "CountingJournalLines": {
+      "type": "object",
+      "required": [
+      "itemId"
+      ],      
+      "properties": {
+        "costMarkup": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "costPrice": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "counted": {
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Precision of two digits."
+        }, 
+        "countingReasonCode": {
+          "type": "string"
+        },                 
+        "defaultDimensionDisplayValue": {
+          "type": "string",
+          "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+        },         
+        "externalRef": {
+          "type": "string"
+        },  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },                         	
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },                 
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "unitQty": {
+          "type": "number"
+        },
+        "worker": {
+          "type": "string",
+          "description": "Id of a worker."
+        }                  
+      }
+    },   
+    "TransferJournal": {
+      "type": "object",
+    "properties": {
+    "_contract": {
+      "type": "object",
+      "required": [
+      "message",
+      "header",
+      "lines"
+      ],
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        },
+        "header": {
+          "$ref": "#/definitions/TransferJournalHeader"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransferJournalLines"
+          }
+        }
+      }
+    }
+    }
+    },  
+    "TransferJournalHeader": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "inventLocationId": {
+          "type": "string"
+        },   
+        "inventSiteId": {
+          "type": "string"
+        },                  
+        "journalId": {
+          "type": "string"
+        },
+        "journalNameId": {
+          "type": "string"
+        },      
+        "postJournal": {
+          "type": "string",
+           "enum": [
+                "Yes",
+                "No"
+             ]
+        },
+        "worker": {
+          "type": "string",
+          "description": "Id of a worker."
+        }
+      }
+    },   
+    "TransferJournalLines": {
+      "type": "object",
+      "required": [
+      "itemId"
+      ],      
+      "properties": {               
+        "defaultDimensionDisplayValue": {
+          "type": "string",
+          "description": "Financial dimensions separated by a hyphen. Format taken from Example value: 003-020-025-."
+        },         
+        "externalRef": {
+          "type": "string"
+        },  
+        "inventDim": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },   
+        "inventDimTo": {
+          "type": "object",
+          "properties": {
+            "batchId": {
+              "type": "string",
+              "description": "Tracking dimension: Batch number"
+            },
+            "colorId": {
+              "type": "string",
+              "description": "Product dimension: Color"
+            },
+            "configId": {
+              "type": "string",
+              "description": "Product dimension: Configuration"
+            },
+            "licensePlateId": {
+              "type": "string",
+              "description": "Storage dimension: License plate"
+            },
+            "locationId": {
+              "type": "string",
+              "description": "Storage dimension: Warehouse"
+            },
+            "ownerId": {
+              "type": "string",
+              "description": "Tracking dimension: Owner"
+            },
+            "serialId": {
+              "type": "string",
+              "description": "Tracking dimension: Serial number"
+            },
+            "siteId": {
+              "type": "string",
+              "description": "Storage dimension: Site"
+            },
+            "sizeId": {
+              "type": "string",
+              "description": "Storage dimension: Size"
+            },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },
+            "styleId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "Product dimension: Style"
+            },            
+            "wmsLocationId": {
+              "type": "string",
+              "description": "Storage dimension: Location"
+            }
+          }
+        },                         	
+                              	
+        "itemId": {
+          "type": "string"
+        },
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },  
+        "pdsCopyBatchAttrib": {
+          "type": "string"
+        },               
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "unitQty": {
+          "type": "number"
+        }                 
+      }
+    },                 
+    "Line": {
+      "type": "object",
+      "properties": {
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },      
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "externalItemId": {
+          "type": "string"
+        },        
+        "itemId": {
+          "type": "string"
+        },
+        "salesPrice": {
+          "type": "string"
+        },
+        "salesQty": {
+          "type": "string"
+        },
+        "salesUnit": {
+          "type": "string"
+        },
+            "inventDim": {
+              "type": "object",
+              "properties": {
+                "batchId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Batch number"
+                },
+                "colorId": {
+                  "type": "string",
+                  "description": "Product dimension: Color"
+                },
+                "configId": {
+                  "type": "string",
+                  "description": "Product dimension: Configuration"
+                },
+                "licensePlateId": {
+                  "type": "string",
+                  "description": "Storage dimension: License plate"
+                },
+                "locationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Warehouse"
+                },
+                "ownerId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Owner"
+                },
+                "serialId": {
+                  "type": "string",
+                  "description": "Tracking dimension: Serial number"
+                },
+                "siteId": {
+                  "type": "string",
+                  "description": "Storage dimension: Site"
+                },
+                "sizeId": {
+                  "type": "string",
+                  "description": "Storage dimension: Size"
+                },
+                "statusId": {
+                  "type": "string",
+                  "description": "Storage dimension: Inventory status"
+                },
+                "styleId": {
+                  "type": "string",
+                  "description": "Product dimension: Style"
+                },
+                "wmsLocationId": {
+                  "type": "string",
+                  "description": "Storage dimension: Location"
+                }
+              }
+            },           
+        "itemBarCode": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        }        
+      }
+    },
+    "SalesOrderUpdateLine": {
+      "type": "object",
+      "properties": {
+        "deliveryName": {
+          "type": "string"
+        },
+        "deliveryCity": {
+          "type": "string"
+        },
+        "deliveryCountryRegionId": {
+          "type": "string"
+        },
+        "deliveryState": {
+          "type": "string"
+        },
+        "deliveryStreet": {
+          "type": "string"
+        },
+        "deliveryZipCode": {
+          "type": "string"
+        },      
+        "lineNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "externalItemId": {
+          "type": "string"
+        },        
+        "itemId": {
+          "type": "string"
+        },
+        "salesPrice": {
+          "type": "string"
+        },
+        "salesQty": {
+          "type": "string"
+        },
+        "salesUnit": {
+          "type": "string"
+        },
+        "itemBarCode": {
+          "type": "string"
+        },
+        "globalTradeItemNumber": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "receiptDateRequested": {
+          "type": "string"
+        },
+        "shippingDateRequested": {
+          "type": "string"
+        } ,    
+        "updateAction": {
+          "type": "string"
+        }            
+      }
+    },    
+    "ApiResponse": {
+      "type": "object",
+      "required": [
+        "$id",
+        "jobId",
+        "jobStatus",
+        "jobMessage"
+      ],
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "NOTE! This field will not be sent back for Interfaces set to Asynchronous response."
+        },
+        "message": {
+          "type": "string",
+          "description": "NOTE! This field will not be sent back for Interfaces set to Asynchronous response."
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "jobStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "None => 0 <br />  Pending => 11 <br />  Processing => 12 <br /> Processed => 13 <br /> Retry => 14 <br /> Error => 15"
+        },
+        "jobMessage": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "$id": "1",
+        "status": "200",
+        "message": "Message imported.",
+        "jobId": "2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770",
+        "jobStatus": "13",
+        "JobMessage": "Job '2023-06-09T12:59:49-0DABEE0293684C87B2E1B2D7AA65E770' has been processed succesfully."
+      }
+    },
+    "Api400Response": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string"
+        },
+        "ExceptionType": {
+          "type": "string"
+        },
+        "ActivityId": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "Message": "An exception occured when deserializing the request - Exception occurred when parsing and deserializing parameter '_contract' - 'Parameter '_contract' is not found within the request content body.",
+        "ExceptionType": "XppServicesDeserializationException",
+        "ActivityId": "15eeee57-9ac2-0001-4325-ef15c29ad901"
+      }
+    },
+    "Api500Response": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string"
+        },
+        "ExceptionType": {
+          "type": "string"
+        },
+        "ActivityId": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "Message": "An exception occured when invoking the operation - Schnittstelle PurchTableCreate_WS Verarbeitung FXLIntegrationProcess_In_PurchTableCreate ist nicht aktiv oder Integrationsteilnehmer nicht identifiziert (Die Suche nach dem Integrationspartner erfolgt über eine Kombination aus Schnittstelle, Konto/GLN/Barcode und Anwendung).",
+        "ExceptionType": "ErrorException",
+        "ActivityId": "15eeee57-9ac2-0001-4325-ef15c29ad902"
+      }
+    },
+    "ApiStatusResponse": {
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "logStatus": {
+          "type": "object",
+          "properties": {
+            "$id": {
+              "type": "string"
+            },
+            "validationErrors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValidationErrors"
+              }
+            },
+            "logDateTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "integrationJobId": {
+              "type": "string"
+            },
+            "logStatus": {
+              "type": "integer",
+              "description": "None => 0 <br />  Job Pending => 11 <br />  Job Processing => 12 <br /> Job Processed => 13 <br /> Job Retry => 14 <br /> Job Error => 15 <br /> Import Imported => 21 <br /> Import Validated => 22 <br /> Import Posted => 23 <br /> Import Validation Error => 24 <br /> Import Posting Error => 25 <br /> Import Cancelled => 26 <br /> Import Approved => 27 <br /> Import Rejected => 28"
+            },
+            "logStatusStr": {
+              "type": "string"
+            },
+            "logMessage": {
+              "type": "string"
+            },
+            "errorCode": {
+              "type": "string"
+            },
+            "messageId": {
+              "type": "string"
+            },
+            "eventName": {
+              "type": "string"
+            },
+            "logRecId": {
+              "type": "number"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "jobStatus": {
+          "description": "None => 0 <br />  Pending => 11 <br />  Processing => 12 <br /> Processed => 13 <br /> Retry => 14 <br /> Error => 15",
+          "type": "integer",
+          "format": "int32"
+        },
+        "jobMessage": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "$id": "1",
+        "logStatus": {
+          "$id": "2",
+          "validationErrors": [
+            {
+              "$id": 3,
+              "validationResultStr": "Error",
+              "logText": "Correct Country/region must be specified; Correct ZIP/postal code must be specified; Correct Street must be specified",
+              "errorCode": ""
+            },
+            {
+              "$id": 4,
+              "validationResultStr": "Error",
+              "logText": "Receive date must be later than or equal to the ship date.",
+              "errorCode": ""
+            }
+          ],
+          "logDateTime": "2025-03-18T21:38:45.000Z",
+          "integrationJobId": "2025-03-18T22:38:38-48DE416636BA42F59EEF1567C1331B6F",
+          "logStatus": 9,
+          "logStatusStr": "Job processed",
+          "logMessage": null,
+          "errorCode": null,
+          "messageId": null,
+          "eventName": "SalesTableCreate_WS",
+          "logRecId": 5637144579,
+          "message": null
+        },
+        "status": "200",
+        "message": "Integration status retrieved",
+        "jobId": "2025-03-18T22:50:58-C939790BCA784CC8B2D35ACD83F7F8D1",
+        "jobStatus": "2",
+        "JobMessage": "Job '2025-03-18T22:50:58-C939790BCA784CC8B2D35ACD83F7F8D1' has been processed succesfully.   "
+      }
+    },
+    "ValidationErrors": {
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "validationResultStr": {
+          "type": "string"
+        },
+        "logText": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about FlexxWare",
+    "url": "https://soluvine.com/products"
+  }
+}
