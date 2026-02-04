@@ -1949,7 +1949,8 @@
           "type": "object",
           "required": [
             "message",
-            "header"
+            "header",
+            "lines"
           ],
           "properties": {
             "message": {
@@ -1957,9 +1958,6 @@
             },
             "header": {
               "type": "object",
-              "required": [
-                "transDate"
-              ],
               "properties": {
                               "externalRef": {
                   "type": "string",
@@ -2000,7 +1998,6 @@
       "type": "object",
       "required": [
         "itemId",
-        "qty",
         "transDate"
       ],
       "properties": {
@@ -2056,18 +2053,15 @@
             "configId": {
               "type": "string"
             },
-            "inventDimId": {
-              "type": "string"
-            },
             "licensePlateId": {
               "type": "string"
             },
             "locationId": {
               "type": "string"
             },
-            "palletId": {
+            "ownerId": {
               "type": "string"
-            },
+            },            
             "serialId": {
               "type": "string"
             },
@@ -2077,6 +2071,10 @@
             "sizeId": {
               "type": "string"
             },
+            "statusId": {
+              "type": "string",
+              "description": "Storage dimension: Inventory status"
+            },            
             "styleId": {
               "type": "string"
             },
